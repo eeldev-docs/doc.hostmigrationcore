@@ -18,3 +18,4 @@ Initial release for Unreal Engine 5.8.
 - Pause during the grace period and a built-in or custom overlay.
 - Steam lobby adapter with automatic lobby detection, Null adapter, Blueprint adapter.
 - Steam: the lobby follows the current host, so the engine's Join Session node works after a migration.
+- Steam: no SteamShared dependency; the adapter uses the Steam API your project already loads (works with SteamCore PRO).
