@@ -40,8 +40,9 @@ Each migration increases the **epoch**, so chained migrations (the new host leav
 
 ## Graceful leave
 
-A host that leaves on purpose with **Leave Session** (or **Begin Graceful Migration**) sends a final snapshot and
-tells everyone to migrate right away. Nothing is lost and nobody waits for a timeout.
+A host that leaves on purpose with **Leave Session**, **Quit Game** (or **Begin Graceful Migration**) sends a final
+snapshot and tells everyone to migrate right away. Nothing is lost and nobody waits for a timeout. Closing the game
+window does the same.
 
 ## What does not need changing
 

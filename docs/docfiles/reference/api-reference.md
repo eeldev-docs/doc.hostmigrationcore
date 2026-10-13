@@ -12,6 +12,7 @@ GameInstance subsystem. `#include "HostMigrationSubsystem.h"`
 | Function | Description |
 |---|---|
 | `void LeaveSession(const FString& TravelURL)` | Leave and travel to TravelURL. On the host, migrate the others first. |
+| `void QuitGame()` | Quit the game. On the host, migrate the others first and quit ~1.5 s later. |
 | `void BeginGracefulMigration()` | Host: final snapshot, everyone migrates now. Leave about 1 s later. |
 | `EHostMigrationState GetState()` | Current state. |
 | `int32 GetEpoch()` | Increases with each migration. |

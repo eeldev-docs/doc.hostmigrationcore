@@ -18,6 +18,7 @@ ClientWaitMap=/Game/Maps/WaitMap.WaitMap
 | Setting | Default | Description |
 |---|---|---|
 | `bEnabled` | true | Turns host migration on or off. |
+| `bHandOverOnWindowClose` | true | Host closing the window hands the match over first, then closes ~1.5 s later. Not in PIE. |
 | `AdapterClass` | Null | The online backend. |
 
 ## Snapshot
