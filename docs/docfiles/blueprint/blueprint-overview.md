@@ -21,6 +21,7 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | Node | What it does |
 |---|---|
 | **Leave Session** | Leave the match. On the host, hands it over first. |
+| **Quit Game** | Quit the game. On the host, hands it over first. Use instead of the engine's Quit Game. |
 | **Begin Graceful Migration** | Host: send a final snapshot and tell everyone to migrate now. |
 | **Get State** | Current [state](../reference/api-reference#states). |
 | **Is Migrating** | True during a migration (not Running, not Failed). |

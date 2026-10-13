@@ -43,8 +43,9 @@ Components with SaveGame variables are saved with their actor.
 
 ## 5. Let the host leave properly
 
-When the host quits on purpose, call **Leave Session** instead of `open <map>`. The match continues on another
-player's machine.
+When the host leaves on purpose, call **Leave Session** instead of `open <map>`, and the subsystem's **Quit Game**
+instead of the engine's Quit Game. The match continues on another player's machine. Closing the game window is
+handled for you.
 
 That's it. Crash the host (or close it) and the match continues on one of the other players.
 

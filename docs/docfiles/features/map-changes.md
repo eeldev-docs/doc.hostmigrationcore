@@ -31,5 +31,17 @@ Use **Leave Session** (with the map to go to) instead of a plain `open <map>`:
 
 A host that leaves with a plain `open` ends the match for everyone, as it would without the plugin.
 
+## Quitting the game
+
+| How the host quits | What happens |
+|---|---|
+| Closes the window (X, Alt+F4) | Hands the match over, then closes about 1.5 s later. The window hides at once. Turn off with `bHandOverOnWindowClose`. |
+| **Quit Game** node of the subsystem | Same: hands over, then quits. |
+| The engine's **Quit Game** node or the `quit` command | Exits at once. The others treat it as a crash and migrate after the timeout, losing progress since the last snapshot. |
+
+Use the subsystem's **Quit Game** for your quit button. Window-close handling works in packaged and standalone
+games, not in PIE. If your game already handles the window close (e.g. an "are you sure?" prompt bound to
+`OnWindowCloseRequested`), it is asked first.
+
 **Begin Graceful Migration** is the lower-level version for the host: it sends a final snapshot and tells everyone to
 migrate. Leave about a second later, so the messages get out.

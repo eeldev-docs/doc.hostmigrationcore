@@ -12,6 +12,7 @@ The most important ones:
 
 | Setting | Default | What it does |
 |---|---|---|
+| **Hand Over On Window Close** | on | Host closing the window hands the match over first instead of counting as a crash. |
 | **Adapter Class** | Null | The online backend. **Steam Lobby** for Steam. |
 | **Client Wait Map** | none | Empty map clients wait in. Strongly recommended. |
 | **Snapshot Interval** | 3 s | How often the host sends state. Lower = less lost progress, more traffic. |
