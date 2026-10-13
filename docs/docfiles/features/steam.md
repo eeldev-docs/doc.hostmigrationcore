@@ -22,7 +22,15 @@ The most recently entered lobby is used.
 If players are in more than one lobby (a party lobby and a match lobby), call **Set Steam Lobby** with the match
 lobby's id on every machine. **Get Steam Lobby** returns the lobby in use.
 
-Lobby ownership does not need to change hands when the host changes.
+## Join Session works after a migration
+
+The engine's **Join Session** node (and Advanced Sessions) connects to the address stored in the lobby when it was
+created, which is the original host. The adapter keeps that address current: whoever owns the lobby hands ownership to
+the current host, and the host then points the lobby's session address (`P2PADDR`, `OWNINGID`, `OWNINGNAME`) at
+itself. This takes a second or two after a migration. Only keys that already exist are changed, so lobbies created
+another way are left alone.
+
+So players coming back, or joining late, can use the usual **Find Sessions** and **Join Session** nodes.
 
 ## What the adapter does
 
@@ -40,8 +48,8 @@ Member data of a player who left disappears with them, so only live hosts are li
 things that point at the old host: lobby data your matchmaking reads, rich presence connect strings, or a session you
 advertise.
 
-Players who are not connected yet (late joiners, returning players) can call **Find Host In Lobby** to get the current
-host's address. If several members have announced, the one with the most players wins, then the highest epoch.
+Players who are not connected yet (late joiners, returning players) can use **Join Session** (see above), or call
+**Find Host In Lobby** to get the current host's address. If several members have announced, the one with the most players wins, then the highest epoch.
 
 ## Crash timing
 
