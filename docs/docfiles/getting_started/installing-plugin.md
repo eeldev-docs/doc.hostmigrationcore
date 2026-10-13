@@ -14,7 +14,8 @@ title: Installing the plugin
 ## Enable the plugin
 
 Open your project, go to **Edit → Plugins**, search for **HostMigrationCore** and make sure it is enabled.
-Restart the editor when asked. The plugin enables **SteamShared** as a dependency.
+Restart the editor when asked. The plugin has no plugin dependencies; for Steam, enable your Steam layer as usual
+(OnlineSubsystemSteam + SteamSockets, or SteamCore PRO).
 
 ## Installing manually (project plugin)
 

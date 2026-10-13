@@ -8,10 +8,27 @@ title: Steam
 ## Setup
 
 1. Set **Adapter Class** to **Steam Lobby**.
-2. Use the **SteamSockets** net driver. Clients connect to `steam.<SteamID64>`.
+2. Use a Steam net driver whose addresses are `steam.<SteamID64>`: **SteamSockets** (engine) or
+   **SteamCoreSockets** (SteamCore PRO).
 3. Keep every player in a **Steam lobby** for the whole match. The lobby outlives the host, so it is what the players
    use to find each other again.
-4. Something must initialise Steam and pump its callbacks: OnlineSubsystemSteam, SteamCorePRO, or your own code.
+4. Something must initialise Steam and pump its callbacks: OnlineSubsystemSteam, SteamCore PRO, or your own code.
+
+The adapter never loads or initialises Steam itself. It waits until your Steam layer has loaded the Steam API and then
+uses that same copy, so it works next to OnlineSubsystemSteam, SteamCore PRO or raw Steamworks without a second Steam
+loader in the game.
+
+### With SteamCore PRO
+
+Disable OnlineSubsystemSteam and SteamSockets and use SteamCore PRO's own subsystem and net driver:
+
+```ini
+[/Script/Engine.GameEngine]
+!NetDriverDefinitions=ClearArray
++NetDriverDefinitions=(DefName="GameNetDriver",DriverClassName="/Script/SteamCoreSockets.SteamCoreSocketsNetDriver",DriverClassNameFallback="/Script/SteamCoreSockets.SteamCoreSocketsNetDriver")
+```
+
+Create or join the lobby with SteamCore PRO as usual. The adapter detects it.
 
 ## The lobby
 
