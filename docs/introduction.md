@@ -19,7 +19,8 @@ Everything is available from **Blueprint and C++**.
 
 :::tip
 New to the plugin? Start with [Installing the plugin](docfiles/getting_started/installing-plugin) and the
-[Quick Start](docfiles/getting_started/quick-start).
+[Quick Start](docfiles/getting_started/quick-start), or download the
+[Example Project](docfiles/getting_started/example-project) to see a working setup.
 :::
 
 ## Features
