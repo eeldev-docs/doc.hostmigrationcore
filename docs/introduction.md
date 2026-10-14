@@ -23,6 +23,12 @@ New to the plugin? Start with [Installing the plugin](docfiles/getting_started/i
 [Example Project](docfiles/getting_started/example-project) to see a working setup.
 :::
 
+## Demo video
+
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/TIQQrdchQfY" title="HostMigrationCore demo" frameBorder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+
+[Watch on YouTube](https://www.youtube.com/watch?v=TIQQrdchQfY)
+
 ## Features
 
 | Feature | Description |
