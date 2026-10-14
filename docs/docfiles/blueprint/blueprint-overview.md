@@ -23,7 +23,7 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Leave Session** | Leave the match. On the host, hands it over first. |
 | **Quit Game** | Quit the game. On the host, hands it over first. Use instead of the engine's Quit Game. |
 | **Begin Graceful Migration** | Host: send a final snapshot and tell everyone to migrate now. |
-| **Get State** | Current [state](../reference/api-reference#states). |
+| **Get State** | Current [state](#states). |
 | **Is Migrating** | True during a migration (not Running, not Failed). |
 | **Is Local Host** | True on the machine that hosts. |
 | **Get Epoch** | Increases with each migration. |
@@ -55,3 +55,18 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 ## Steam
 
 **Get Steam Lobby** and **Set Steam Lobby** (only to override the detected lobby). See [Steam](../features/steam).
+
+## States
+
+`EHostMigrationState`, returned by **Get State** and passed to **On State Changed**.
+
+| State | Meaning |
+|---|---|
+| `Running` | Normal play. |
+| `Electing` | The host was lost; picking a successor. |
+| `BecomingHost` | This machine is the successor and is loading the map. |
+| `WaitingForHost` | Waiting for the successor to announce itself. |
+| `Reconnecting` | Connecting to the new host. |
+| `GracePeriod` | New host: waiting for previous players. |
+| `RejoiningHost` | Connection dropped but the host is still in the session; reconnecting to it. |
+| `Failed` | The migration did not succeed. |
