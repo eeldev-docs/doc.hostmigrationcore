@@ -11,6 +11,7 @@ See HostMigrationCore working over Steam, either as a ready-to-run demo or as a 
 |---|---|---|
 | [**Demo** (HostMigrationExample.zip)](http://eeldev.com/tmp/HostMigrationExample.zip) | A packaged build. Unzip and run it on two machines to see host migration in action. | No |
 | [**Example project** (GitHub releases)](https://github.com/eeldev-ue4/HostMigrationExample/releases) | The Unreal Engine project, to see how it is set up. | Yes |
+| [**Demo video** (YouTube)](https://www.youtube.com/watch?v=TIQQrdchQfY) | The demo in action, if you do not have two machines at hand. | No |
 
 :::warning Steam AppId 480
 The example uses Steam AppId **480** (Spacewar), Valve's shared test app. It is fine for trying things out, but Steam
