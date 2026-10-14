@@ -55,3 +55,4 @@ That's it. Crash the host (or close it) and the match continues on one of the ot
 - [Events](../blueprint/events): restart timers and effects after a migration.
 - [Plugin Settings](plugin-settings): timings, pause, overlay.
 - [Testing](testing): try it locally.
+- [Example Project](example-project): a working Steam setup to download and try.
