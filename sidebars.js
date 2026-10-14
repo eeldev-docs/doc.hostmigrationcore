@@ -18,6 +18,11 @@ const sidebars = {
     },
     {
       type: 'doc',
+      id: 'docfiles/getting_started/example-project',
+      label: 'Example Project'
+    },
+    {
+      type: 'doc',
       id: 'faq'
     },
     {
