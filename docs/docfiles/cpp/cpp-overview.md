@@ -62,4 +62,4 @@ Migration->OnHostChanged.AddDynamic(this, &ThisClass::HandleHostChanged);
 Migration->LeaveSession(TEXT("/Game/Maps/MainMenu"));
 ```
 
-See the [API Reference](../reference/api-reference).
+All functions and events are documented in the headers: `HostMigrationSubsystem.h`, `HostMigrationBlueprintLibrary.h`, `HostMigrationEvents.h` and `HostMigratable.h`.
