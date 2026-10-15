@@ -22,10 +22,6 @@ const sidebars = {
       label: 'Example Project'
     },
     {
-      type: 'doc',
-      id: 'faq'
-    },
-    {
       type: 'link',
       label: 'eeldev.com',
       href: 'http://eeldev.com/',
