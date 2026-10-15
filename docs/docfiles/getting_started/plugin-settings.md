@@ -22,4 +22,4 @@ The most important ones:
 | **Pause During Grace Period** | on | Pause while players reconnect. |
 | **Show Migration Overlay** | on | Show a "reconnecting" screen during a migration. |
 
-All settings are listed in the [Settings Reference](../reference/settings-reference).
+Every setting has a tooltip in **Project Settings → Plugins → Host Migration**.

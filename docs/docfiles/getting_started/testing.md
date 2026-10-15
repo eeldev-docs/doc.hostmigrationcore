@@ -40,11 +40,6 @@ lost-connection handling (rejoin, split brain) does not apply. Use Steam to test
 Steam needs one Steam account per machine. Package a Development build, start it on two or more machines, put all
 players in the same Steam lobby, start the match and close or kill the host. See [Steam](../features/steam).
 
-## Automation tests
-
-The plugin ships with automation tests (snapshots, deltas, components, references). Run them from
-**Tools → Session Frontend → Automation**, filter on `HostMigration`. From the command line: `-ExecCmds="Automation RunTests HostMigration; Quit"`.
-
 ## Tips
 
 - Bind **On State Changed** and print the state to see where a migration is.
