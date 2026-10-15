@@ -39,7 +39,6 @@ Right click your `.uproject` → **Generate Visual Studio project files**, then 
 |---|---|---|
 | `HostMigrationCore` | Runtime | The subsystem, components, interfaces, Null and Blueprint adapters, overlay. |
 | `HostMigrationCoreSteam` | Runtime | The Steam lobby adapter. |
-| `HostMigrationCoreTests` | DeveloperTool | Automation tests (not packaged in Shipping). |
 
 C++ projects that call the API add `HostMigrationCore` to their module's `PublicDependencyModuleNames`
 (and `HostMigrationCoreSteam` if they call the Steam adapter directly).
