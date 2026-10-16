@@ -7,6 +7,8 @@ title: Installing the plugin
 
 ## Install from Fab
 
+Get the plugin from [HostMigrationCore on Fab](https://www.fab.com/listings/01eebf59-f05a-42be-bc3f-6f4256edd33c), then:
+
 1. Open the **Epic Games Launcher** and go to **Unreal Engine → Library → Fab Library**.
 2. Search for **HostMigrationCore**.
 3. Click **Install to Engine** and select **5.8**.
