@@ -17,6 +17,8 @@ No custom GameEngine, GameMode or GameInstance is needed. Add a component to the
 
 Everything is available from **Blueprint and C++**.
 
+**Get it on [Fab](https://www.fab.com/listings/01eebf59-f05a-42be-bc3f-6f4256edd33c).**
+
 :::tip
 New to the plugin? Start with [Installing the plugin](docfiles/getting_started/installing-plugin) and the
 [Quick Start](docfiles/getting_started/quick-start), or download the
