@@ -13,6 +13,11 @@ See HostMigrationCore working over Steam, either as a ready-to-run demo or as a 
 | [**Example project** (GitHub releases)](https://github.com/eeldev-ue4/HostMigrationExample/releases) | The Unreal Engine project, to see how it is set up. | Yes |
 | [**Demo video** (YouTube)](https://www.youtube.com/watch?v=TIQQrdchQfY) | The demo in action, if you do not have two machines at hand. | No |
 
+:::info Unreal Engine 5.8 only
+The example project is only available for **Unreal Engine 5.8**. The plugin itself supports 5.5, 5.6, 5.7 and 5.8,
+but the project's assets cannot be opened in older engine versions.
+:::
+
 :::warning Steam AppId 480
 The example uses Steam AppId **480** (Spacewar), Valve's shared test app. It is fine for trying things out, but Steam
 limits it: you share it with everyone else testing on 480, so lobby searches can be slow or return other games'
@@ -32,7 +37,7 @@ See [Testing](testing) for what to look for in the logs.
 
 ## Opening the project
 
-The project needs HostMigrationCore installed for the same engine version; see
+The project needs Unreal Engine 5.8 with HostMigrationCore installed; see
 [Installing the plugin](installing-plugin). Open the `.uproject`, and the settings under
 **Project Settings → Plugins → Host Migration** show the setup used.
 
