@@ -50,6 +50,9 @@ New to the plugin? Start with [Installing the plugin](docfiles/getting_started/i
 | Engine | Status |
 |---|---|
 | Unreal Engine 5.8 | ✅ Supported |
+| Unreal Engine 5.7 | ✅ Supported |
+| Unreal Engine 5.6 | ✅ Supported |
+| Unreal Engine 5.5 | ✅ Supported |
 
 ## Supported platforms and backends
 
