@@ -16,6 +16,7 @@ The most important ones:
 | **Adapter Class** | Null | The online backend. **Steam Lobby** for Steam. |
 | **Client Wait Map** | none | Empty map clients wait in. Strongly recommended. |
 | **Snapshot Interval** | 3 s | How often the host sends state. Lower = less lost progress, more traffic. |
+| **Connect Attempt Timeout** | 30 s | How long one connection attempt may take before it is cancelled and retried. 0 = no limit. |
 | **Reconnect Grace Period** | 30 s | How long the new host waits for previous players. |
 | **Inactive Player Timeout** | 300 s | How long a player who left keeps their state for a rejoin. |
 | **Leaving Player Pawn** | Keep In World | What happens to the pawn of a player who leaves. |

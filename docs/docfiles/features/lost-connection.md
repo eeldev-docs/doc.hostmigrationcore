@@ -22,7 +22,8 @@ membership).
 
 ## Connecting to the new host
 
-Connections are retried **Max Reconnect Attempts** times, **Reconnect Retry Delay** apart. If that host stays
+Connections are retried **Max Reconnect Attempts** times, **Reconnect Retry Delay** apart. An attempt that has not
+connected within **Connect Attempt Timeout** (30 s, 0 = no limit) is cancelled and counts as failed. If that host stays
 unreachable, the client moves on to the next candidate. A candidate that does not announce itself within
 **Candidate Timeout** is skipped.
 

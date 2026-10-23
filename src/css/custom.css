@@ -202,6 +202,20 @@ body {
   padding-left: 0;
 }
 
+/* Plain section heading in the sidebar (html item) */
+
+.eel-sidebar-section {
+  margin: 2rem 0 0.4rem;
+  padding: 1rem var(--ifm-menu-link-padding-horizontal) 0;
+  border-top: 1px solid var(--eel-border);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--eel-text);
+}
+
 /* Product switcher at the top of the sidebar */
 
 .eel-product-switcher {
