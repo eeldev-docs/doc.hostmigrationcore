@@ -30,4 +30,4 @@ When a record expires, the player's unpossessed pawn is destroyed (**Destroy Paw
 ## New players
 
 Players who join after a migration join like any other player. Players who are not connected yet can find the current
-host with **Find Host In Lobby**. See [Steam](steam).
+host with **Find Host In Lobby**. See [Steam](steam) and [EOS](eos).

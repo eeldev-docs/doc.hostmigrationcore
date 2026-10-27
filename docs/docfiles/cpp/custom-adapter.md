@@ -40,4 +40,4 @@ Host migration needs per-member data that every member can write.
 - **OSSv2** (`UE::Online::ILobbies`): has member attributes and member-left events, but in 5.8 only EOS and Null
   implement Lobbies.
 
-So Steam has its own adapter, and EOS support is planned through OSSv2 Lobbies.
+So Steam and EOS each have their own adapter, working on Steam lobbies and EOS lobbies directly.

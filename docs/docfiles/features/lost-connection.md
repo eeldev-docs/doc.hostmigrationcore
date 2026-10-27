@@ -6,12 +6,12 @@ title: Lost connection
 # Lost connection: rejoin, reconnect, split brain
 
 A dropped connection does not always mean the host is gone. These rules keep one player's network trouble from
-splitting the match. They need an adapter with presence and announcements (Steam does both).
+splitting the match. They need an adapter with presence and announcements (Steam and EOS do both).
 
 ## Is the host gone, or only us?
 
-When the connection drops, the client asks the adapter whether the host is still in the session (Steam: lobby
-membership).
+When the connection drops, the client asks the adapter whether the host is still in the session (Steam and EOS:
+lobby membership).
 
 - **The host is still there:** the client **rejoins the host** (state `RejoiningHost`) for up to **Rejoin Timeout**
   and gets its state back as a returning player. No migration, so a player with a hiccup never splits off into a match

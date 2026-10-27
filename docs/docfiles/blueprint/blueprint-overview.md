@@ -56,6 +56,10 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 
 **Get Steam Lobby** and **Set Steam Lobby** (only to override the detected lobby). See [Steam](../features/steam).
 
+## EOS
+
+**Get EOS Lobby** and **Set EOS Lobby** (only to override the detected lobby). See [EOS](../features/eos).
+
 ## States
 
 `EHostMigrationState`, returned by **Get State** and passed to **On State Changed**.

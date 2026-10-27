@@ -16,8 +16,9 @@ Get the plugin from [HostMigrationCore on Fab](https://www.fab.com/listings/01ee
 ## Enable the plugin
 
 Open your project, go to **Edit → Plugins**, search for **HostMigrationCore** and make sure it is enabled.
-Restart the editor when asked. The plugin has no plugin dependencies; for Steam, enable your Steam layer as usual
-(OnlineSubsystemSteam + SteamSockets, or SteamCore PRO).
+Restart the editor when asked. The plugin enables the engine's **EOSShared** and **OnlineSubsystem** plugins. For
+Steam, enable your Steam layer as usual (OnlineSubsystemSteam + SteamSockets, or SteamCore PRO). For EOS, enable
+yours (OnlineSubsystemEOS + SocketSubsystemEOS, or EOSCore).
 
 ## Installing manually (project plugin)
 
@@ -41,6 +42,7 @@ Right click your `.uproject` → **Generate Visual Studio project files**, then 
 |---|---|---|
 | `HostMigrationCore` | Runtime | The subsystem, components, interfaces, Null and Blueprint adapters, overlay. |
 | `HostMigrationCoreSteam` | Runtime | The Steam lobby adapter. |
+| `HostMigrationCoreEOS` | Runtime | The EOS lobby adapter. |
 
 C++ projects that call the API add `HostMigrationCore` to their module's `PublicDependencyModuleNames`
-(and `HostMigrationCoreSteam` if they call the Steam adapter directly).
+(and `HostMigrationCoreSteam` or `HostMigrationCoreEOS` if they call the Steam or EOS adapter directly).

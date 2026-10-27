@@ -14,7 +14,7 @@ only get what changed ([delta snapshots](../features/snapshot-traffic)).
 Each snapshot also contains an ordered **successor list**: the players who may take over, best first (lowest ping by
 default).
 
-Every host announces itself through the adapter while it hosts. On Steam that is lobby member data.
+Every host announces itself through the adapter while it hosts. On Steam and EOS that is lobby member data.
 
 ## When the host is lost
 

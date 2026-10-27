@@ -10,6 +10,7 @@ title: Quick Start
 **Project Settings → Plugins → Host Migration → Adapter Class**
 
 - **Steam Lobby** for Steam. See [Steam](../features/steam).
+- **EOS Lobby** for Epic Online Services. See [EOS](../features/eos).
 - **Null** for LAN and local testing.
 - Your own Blueprint or C++ adapter for anything else.
 

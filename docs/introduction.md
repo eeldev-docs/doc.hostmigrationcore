@@ -43,6 +43,7 @@ New to the plugin? Start with [Installing the plugin](docfiles/getting_started/i
 | **[Map changes](docfiles/features/map-changes)** | ServerTravel and seamless travel work as usual. `LeaveSession` hands the match over before the host leaves. |
 | **[Pause and overlay](docfiles/features/pause-and-overlay)** | Pauses while players reconnect and shows a "reconnecting" screen. Bring your own widget if you like. |
 | **[Steam](docfiles/features/steam)** | Steam lobby adapter, detects the lobby by itself whichever API joined it. |
+| **[EOS](docfiles/features/eos)** | EOS lobby adapter for OnlineSubsystemEOS, EOSCore or your own EOS SDK code. |
 | **[Blueprint](docfiles/blueprint/blueprint-overview) + [C++](docfiles/cpp/cpp-overview)** | Events, nodes, a Blueprint adapter for your own backend, and a native interface for custom data. |
 
 ## Supported engine versions
@@ -61,6 +62,6 @@ New to the plugin? Start with [Installing the plugin](docfiles/getting_started/i
 | Steam (lobby + SteamSockets) | ✅ Supported |
 | LAN / Null | ✅ Supported (no presence or announcements) |
 | Your own backend | ✅ Through the [Blueprint adapter](docfiles/blueprint/blueprint-adapter) or a [C++ adapter](docfiles/cpp/custom-adapter) |
-| EOS | Planned |
+| EOS (lobby + NetDriverEOS or EOSCore) | ✅ Supported |
 
 Windows, Linux and Mac.

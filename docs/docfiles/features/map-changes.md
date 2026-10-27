@@ -13,6 +13,9 @@ starting with a full snapshot.
 - **During a map change** (from the host's travel until the new map is loaded), a lost connection does not start a
   migration, because the state is being replaced right then. If the host dies exactly then, Unreal's normal disconnect
   handling applies.
+- **A client that cannot follow a non-seamless travel** while the host is still in the session rejoins the host on its
+  new map (state `RejoiningHost`) instead of being dropped. This happens on EOS, where the host closes its P2P socket
+  when it loads the new map. See [EOS](eos#map-changes).
 - **A snapshot is only used on the map it was taken on.** Right after a seamless travel, before the first snapshot of
   the new map has arrived, losing the host is not migrated either.
 - **Players who stepped away** keep their PlayerState data across map changes. Their pawn belonged to the old map, so

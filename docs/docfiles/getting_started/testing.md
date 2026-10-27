@@ -32,13 +32,18 @@ LogHostMigration: Restored player ... (with pawn)
 
 :::note
 The Null adapter has no presence and no announcements: clients assume the successor is up after a short delay, and
-lost-connection handling (rejoin, split brain) does not apply. Use Steam to test those.
+lost-connection handling (rejoin, split brain) does not apply. Use Steam or EOS to test those.
 :::
 
 ## Steam
 
 Steam needs one Steam account per machine. Package a Development build, start it on two or more machines, put all
 players in the same Steam lobby, start the match and close or kill the host. See [Steam](../features/steam).
+
+## EOS
+
+EOS can be tested on one machine: run several instances, each logged in with its own Developer Authentication Tool
+credential. See [EOS](../features/eos#testing-on-one-machine).
 
 ## Tips
 
