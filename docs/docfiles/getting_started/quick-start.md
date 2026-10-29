@@ -48,6 +48,8 @@ When the host leaves on purpose, call **Leave Session** instead of `open <map>`,
 instead of the engine's Quit Game. The match continues on another player's machine. Closing the game window is
 handled for you.
 
+![Pause menu widget: the Leave button calls Leave Session and the Quit button calls the subsystem's Quit Game](../../../static/img/blueprints/WBP_MatchMenu_EventGraph.png)
+
 That's it. Crash the host (or close it) and the match continues on one of the other players.
 
 ## Next steps

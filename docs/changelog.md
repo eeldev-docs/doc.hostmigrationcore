@@ -21,3 +21,6 @@ title: Changelog
   session, now rejoins the host instead of being dropped to the wait map. This mainly happens on EOS, where the host
   closes its P2P socket when it loads the new map.
 - The warning about a Null adapter next to a Steam or EOS net driver now names the matching adapter.
+- **Get Steam Lobby** and **Get EOS Lobby** can now be used from Blueprint. They needed an adapter object that
+  Blueprint had no way to get. In C++ they are now static and take a world context, like **Set Steam Lobby** and
+  **Set EOS Lobby**.

@@ -30,7 +30,7 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Get Status Text** | Localized status line for UI. |
 | **Get Num Players Awaited** | Players the new host is still waiting for. |
 | **Get Host Address** | Address of the current host. |
-| **Find Host In Lobby** | For players not connected yet: where the current host is. |
+| **Find Host In Lobby** (out Host Address, Epoch) | For players not connected yet: where the current host is. Pure node, returns false if no host has announced itself. |
 | **Get Num Inactive Players** | Host: players whose state is kept for a rejoin. |
 | **Get Snapshot Stats** | Host: snapshot sizes and traffic. |
 
@@ -41,6 +41,11 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **On State Changed** (Old State, New State) | Every state change, on every machine. |
 | **On Player Restored** (Player Controller) | Host: a returning player got their state back. |
 | **On Host Changed** (Host Id, Host Address, Is Local Host, Epoch) | The session has a new host. Use it to update lobby data or rich presence. |
+
+Bind them in your **GameInstance** (Event Init). A migration loads the map again, which destroys actors and widgets
+together with the events bound in them.
+
+![GameInstance Event Init binding On State Changed, On Host Changed and On Player Restored, each printing what happened](../../../static/img/blueprints/BP_MigrationGameInstance_EventGraph.png)
 
 ## Library nodes
 
@@ -54,11 +59,13 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 
 ## Steam
 
-**Get Steam Lobby** and **Set Steam Lobby** (only to override the detected lobby). See [Steam](../features/steam).
+**Get Steam Lobby** returns the lobby in use, or an empty string if there is none or the Steam adapter is not active.
+**Set Steam Lobby** overrides the detected lobby. Both work from any Blueprint. See [Steam](../features/steam).
 
 ## EOS
 
-**Get EOS Lobby** and **Set EOS Lobby** (only to override the detected lobby). See [EOS](../features/eos).
+**Get EOS Lobby** returns the lobby in use, or an empty string if there is none or the EOS adapter is not active.
+**Set EOS Lobby** overrides the detected lobby. Both work from any Blueprint. See [EOS](../features/eos).
 
 ## States
 

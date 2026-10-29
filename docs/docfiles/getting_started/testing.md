@@ -47,6 +47,7 @@ credential. See [EOS](../features/eos#testing-on-one-machine).
 
 ## Tips
 
-- Bind **On State Changed** and print the state to see where a migration is.
+- Bind **On State Changed** in the GameInstance and print the state to see where a migration is. See the
+  [Blueprint Overview](../blueprint/blueprint-overview#subsystem-events).
 - **Get Snapshot Stats** shows snapshot sizes and traffic. A summary is also logged every 30 s.
 - `HostMigration.Debug.DropEveryNthDelta N` (console variable, client) drops deltas on purpose to test resyncs.

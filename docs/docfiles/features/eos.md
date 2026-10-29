@@ -26,6 +26,28 @@ title: EOS
 AdapterClass=/Script/HostMigrationCoreEOS.HostMigrationAdapter_EOS
 ```
 
+### With EOSCore
+
+Use NetDriverEOSCore with P2P sockets. HostMigrationCore depends on the engine's EOSShared plugin, which stays
+enabled next to EOSCore, so tell it that the project ships its own EOS SDK binary:
+
+```ini
+[OnlineSubsystem]
+DefaultPlatformService=EOSCore
+
+[EOSSDK]
+bHasProjectBinary=true
+
+[/Script/Engine.GameEngine]
+!NetDriverDefinitions=ClearArray
++NetDriverDefinitions=(DefName="GameNetDriver",DriverClassName="/Script/OnlineSubsystemEOSCore.NetDriverEOSCore",DriverClassNameFallback="/Script/OnlineSubsystemUtils.IpNetDriver")
+
+[/Script/OnlineSubsystemEOSCore.NetDriverEOSCore]
+bIsUsingP2PSockets=true
+```
+
+Disable the engine's OnlineSubsystemEOS and SocketSubsystemEOS plugins, as EOSCore requires.
+
 ## The EOS platform
 
 The adapter never creates or ticks an EOS platform itself. It uses the one your EOS layer already runs, found in this
@@ -101,6 +123,8 @@ The net driver's own timeouts decide how fast a lost connection is noticed:
 ConnectionTimeout=10.0
 InitialConnectTimeout=25.0
 ```
+
+With EOSCore, set the same keys under `[/Script/OnlineSubsystemEOSCore.NetDriverEOSCore]`.
 
 ## Testing on one machine
 

@@ -35,6 +35,8 @@ Measured with 4 players, 300 static props and gameplay going on:
 - Only mark what must survive as SaveGame. Large records that change often (big inventories) are resent whole every
   time they change.
 
+![Print Snapshot Stats: on the host, Get Snapshot Stats is broken into its fields and printed with Format Text](../../../static/img/blueprints/BP_SnapshotStatsController_EventGraph.png)
+
 ## Testing resyncs
 
 `HostMigration.Debug.DropEveryNthDelta N` on a client drops every Nth delta, to see the resync at work.

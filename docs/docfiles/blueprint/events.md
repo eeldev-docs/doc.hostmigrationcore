@@ -25,9 +25,14 @@ again. Restart timers, effects and AI here.
 
 ## Example: a round timer
 
-1. Add a SaveGame float `RemainingTime` to the GameState.
+1. Add a SaveGame float `RemainingTime` to the GameState, and add **Host Migration Events** to its interfaces.
 2. **On Host Migration Save:** `RemainingTime = Get Timer Remaining Time by Handle (RoundTimer)`.
 3. **On Host Migration Restored:** `Set Timer by Event (RoundEnded, RemainingTime)`.
+
+![Round timer GameState: Set Timer by Event on BeginPlay, Remaining Time saved in On Host Migration Save and the timer started again in On Host Migration Restored](../../../static/img/blueprints/BP_RoundGameState_EventGraph.png)
+
+The events show up under **Interfaces** in the My Blueprint panel once the interface is added. Only `RemainingTime`
+needs **SaveGame**. The timer handle is not valid on the new host, and **On Host Migration Restored** sets it again.
 
 ## Showing a "reconnecting" message
 

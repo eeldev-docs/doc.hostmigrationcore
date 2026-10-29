@@ -28,4 +28,9 @@ Bind its text to **Get Status Text** on the subsystem. It is localized, for exam
 "Waiting for players to return (2 left)". You can also use **Get State**, **Get Num Players Awaited** and
 **On State Changed** for your own layout.
 
+![Overlay widget: on Tick, Status Text is set from Get Status Text and Epoch Text from Get Epoch](../../../static/img/blueprints/WBP_MigrationOverlay_EventGraph.png)
+
+The widget is created again after every map load during a migration. Read the subsystem's state as above, and do not
+keep your own state in the widget.
+
 To handle everything yourself, turn **Show Migration Overlay** off and bind **On State Changed**.

@@ -24,6 +24,30 @@ C++.
 | **Get Member Presence** (Player Id) | Rejoin. Present, Gone or Unknown. |
 | **Score Candidate** (Player State) | Optional. Ranks successors, lower is better. Default: ping. |
 
+The plugin calls these events. You cannot call them from your own graph, so put anything you need in more than one
+place, such as this machine's address, in a function of your own.
+
+**Get Connect Address** with a fixed port:
+
+![Get Connect Address override: Break Host Migration Candidate, append :7777 to the Ip Address and return it](../../../static/img/blueprints/BP_MyBackendAdapter_BP_GetConnectAddress.png)
+
+**Publish Host Ready** and **Clear Host Ready** writing to a lobby service. `Set Backend Member Data` and
+`Get My Address` stand for your backend's own calls:
+
+![Publish Host Ready writes hm_addr, hm_epoch and hm_players with Set Backend Member Data, Clear Host Ready clears hm_addr](../../../static/img/blueprints/BP_MyBackendAdapter_EventGraph.png)
+
+**Get Announced Hosts** reads them back as one **Host Migration Announcement** per host:
+
+| Field | What to fill in |
+|---|---|
+| **Host Key** | Something unique per host, for example the player id. |
+| **Address** | What this host wrote as its address. |
+| **Epoch** | What this host wrote as its epoch. |
+| **Num Players** | What this host wrote as its player count. |
+
+**Get Connect Address** gets a **Host Migration Candidate**: **Net Id** (the player's unique net id), **Ip Address**
+(the IP the old host saw) and **Score**.
+
 ## Levels of support
 
 - **Only Get Connect Address:** like the Null adapter. Clients assume the successor is up after **Assumed Host Delay**.

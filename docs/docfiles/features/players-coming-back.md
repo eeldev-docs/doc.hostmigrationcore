@@ -31,3 +31,7 @@ When a record expires, the player's unpossessed pawn is destroyed (**Destroy Paw
 
 Players who join after a migration join like any other player. Players who are not connected yet can find the current
 host with **Find Host In Lobby**. See [Steam](steam) and [EOS](eos).
+
+A Rejoin button for a player who is still in the lobby:
+
+![Rejoin button: Find Host In Lobby, then open the Host Address with Execute Console Command, or print a message if no host was found](../../../static/img/blueprints/WBP_RejoinMenu_EventGraph.png)
