@@ -7,7 +7,7 @@ title: Steam
 
 ## Setup
 
-1. Set **Adapter Class** to **Steam Lobby**.
+1. Set **Adapter Class** to **Steam Adapter**.
 2. Use a Steam net driver whose addresses are `steam.<SteamID64>`: **SteamSockets** (engine) or
    **SteamCoreSockets** (SteamCore PRO).
 3. Keep every player in a **Steam lobby** for the whole match. The lobby outlives the host, so it is what the players

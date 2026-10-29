@@ -7,7 +7,7 @@ title: EOS
 
 ## Setup
 
-1. Set **Adapter Class** to **EOS Lobby**. With **Adapter Class** empty, the plugin picks it by itself when
+1. Set **Adapter Class** to **EOS Adapter**. With **Adapter Class** empty, the plugin picks it by itself when
    `DefaultPlatformService` is `EOS` or `EOSCore`.
 2. Use an EOS P2P net driver whose addresses are `EOS:<ProductUserId>:...`: **NetDriverEOS** (engine,
    SocketSubsystemEOS) or **NetDriverEOSCore** (EOSCore).

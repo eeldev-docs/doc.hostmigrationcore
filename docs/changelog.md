@@ -8,12 +8,17 @@ title: Changelog
 
 ### New
 
-- **EOS adapter.** New **EOS Lobby** adapter in the `HostMigrationCoreEOS` module. It uses EOS lobby membership for
-  presence and lobby member attributes for host announcements, and keeps the current host as lobby owner so
-  **Join Session** works after a migration. It works with OnlineSubsystemEOS, EOSCore or your own EOS SDK code. See
-  [EOS](docfiles/features/eos).
-- **Adapter picked from the platform.** With **Adapter Class** empty, the plugin now also picks **EOS Lobby** when
-  `DefaultPlatformService` is `EOS` or `EOSCore`, as it already did for Steam.
+- **EOS support.** New **EOS Adapter** in the `HostMigrationCoreEOS` module. It uses EOS lobby membership to see who
+  is still in the match and lobby member attributes to announce the new host. It keeps the current host as lobby
+  owner, so **Join Session** works after a migration. It works with OnlineSubsystemEOS, EOSCore (1.9.8.9 or later) or
+  your own EOS SDK code, and finds the lobby by itself. See [EOS](docfiles/features/eos).
+- **Adapter picked from the platform.** With **Adapter Class** empty, the plugin now also picks the **EOS Adapter**
+  when `DefaultPlatformService` is `EOS` or `EOSCore`, as it already did for Steam.
+
+### Changed
+
+- The Steam adapter is now called **Steam Adapter** in Project Settings (before: Steam Lobby). Saved settings keep
+  working, only the name shown changed.
 
 ### Fixed
 
