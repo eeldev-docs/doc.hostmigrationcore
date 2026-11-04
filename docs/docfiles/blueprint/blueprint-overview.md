@@ -33,6 +33,8 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Find Host In Lobby** (out Host Address, Epoch) | For players not connected yet: where the current host is. Pure node, returns false if no host has announced itself. |
 | **Get Num Inactive Players** | Host: players whose state is kept for a rejoin. |
 | **Get Snapshot Stats** | Host: snapshot sizes and traffic. |
+| **Notify Game Ready** | With **Wait For Game Ready**: the game has set up the match, the new host can restore. See [Games that set up the match later](../features/game-ready). |
+| **Is Restore Pending** | New host: the map is loaded but the saved state is not restored yet. |
 
 ## Subsystem events
 

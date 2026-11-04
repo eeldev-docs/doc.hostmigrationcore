@@ -35,6 +35,23 @@ The Null adapter has no presence and no announcements: clients assume the succes
 lost-connection handling (rejoin, split brain) does not apply. Use Steam or EOS to test those.
 :::
 
+### LAN sessions
+
+With OnlineSubsystem Null, a player who joined a LAN session does not advertise it. When that player becomes the host,
+the Null adapter takes over the `GameSession`: it recreates it with this machine as owner, without firing the
+create, start or destroy session events, and registers the players again. **Find Sessions** on LAN then finds the new
+host. Turn this off with **Take Over Session** on the Null adapter.
+
+:::note Lyra
+Lyra's CommonSessionSubsystem joins through a reservation beacon on the host, which the new host does not have. Set
+`bUseBeacons=false` so players can join the new host:
+
+```ini
+[/Script/CommonUser.CommonSessionSubsystem]
+bUseBeacons=false
+```
+:::
+
 ## Steam
 
 Steam needs one Steam account per machine. Package a Development build, start it on two or more machines, put all

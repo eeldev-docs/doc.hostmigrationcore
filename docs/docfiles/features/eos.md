@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 1
 title: EOS
 ---
 
@@ -106,7 +106,10 @@ the wait map for a few seconds before they reach the new map. This needs **Rejoi
 ## Crash timing
 
 After a host crash, clients first try to rejoin it while EOS still lists it in the lobby. The migration starts when EOS
-reports the crashed host as gone, so a crash takes longer than a graceful leave.
+reports the crashed host as gone, about 30 seconds after the crash, so a crash takes longer than a graceful leave.
+
+A game that quits should leave the lobby before it shuts down (`EOS_Lobby_LeaveLobby`). Otherwise EOS keeps it in the
+lobby for the same 30 seconds, as if it had crashed.
 
 Over the internet, give the successor a bit more time to load and announce itself:
 

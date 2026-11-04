@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 title: Lost connection
 ---
 
@@ -40,6 +40,15 @@ announcements. A host that sees a better one on two checks in a row **yields** a
 Better means, in order: more players, higher epoch, earlier in the election order.
 
 The winner restores the moved players as returning players. Progress made on the losing host is lost.
+
+Two cases do not count as a competing host:
+
+- **The old host's announcement.** A host that crashed, or quit without leaving the lobby, can stay listed with the
+  address and epoch it had before the migration. An announcement from the lost host with a lower epoch than this
+  host's is ignored.
+- **A host this machine could not reach.** If the yielding host cannot connect to the winner within **Max Reconnect
+  Attempts**, it hosts again with a higher epoch and its saved state, and ignores that host from then on. Its players
+  join it again.
 
 ## LAN / Null
 
