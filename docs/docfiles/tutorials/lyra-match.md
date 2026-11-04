@@ -1,9 +1,9 @@
 ---
 sidebar_position: 1
-title: "Lyra Sample Project: keep the match"
+title: "Lyra Sample Project"
 ---
 
-# Lyra Sample Project: keep the match
+# Lyra Sample Project
 
 After [Games that set up the match later](../features/game-ready), a Lyra match survives a host migration: the map,
 the pawns and the players come back. The match itself still starts over: teams are picked again, kills, deaths and
@@ -55,6 +55,8 @@ UE_API bool ChangeTeamForActor(AActor* ActorToChange, int32 NewTeamId);
 | `TeamScoreTag` | Gameplay Tag | no | `ShooterGame.Score.Eliminations` |
 
 **SaveGame** is under **Advanced** in the variable's details. Only the three maps need it.
+
+![SavedTeams selected in My Blueprint; in Details, SaveGame under Advanced is checked](../../../static/img/blueprints/B_MatchMigration_SaveGameVariable.png)
 
 `SavedTeams` uses the player's id as key. `SavedStats` uses the player's id plus the tag name, for example
 `hulken-1234ShooterGame.Score.Deaths`, so all stats of all players fit in one map.
