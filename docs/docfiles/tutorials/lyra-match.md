@@ -20,7 +20,7 @@ You need:
   [Example: Lyra](../features/game-ready#example-lyra).
 - **Restore Into Game Pawn** on, so returning players keep the pawn Lyra spawns for them.
 
-The [setup video](https://www.youtube.com/watch?v=1vdb2h8woOA) (YouTube) shows how to set up the Lyra sample project.
+The [Lyra setup video](../videos/lyra-setup) shows how to set up the Lyra sample project.
 
 ## What gets saved
 

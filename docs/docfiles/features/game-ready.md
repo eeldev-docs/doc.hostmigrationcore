@@ -59,7 +59,7 @@ only happen in a new match, such as a warmup phase or a match timer reset.
 Lyra loads its experience after the map, so the new host has to wait for it.
 
 :::tip Video
-[Setting up the Lyra sample project](https://www.youtube.com/watch?v=1vdb2h8woOA) (YouTube) shows these steps.
+The [Lyra setup video](../videos/lyra-setup) shows these steps.
 :::
 
 1. Turn on **Wait For Game Ready** and **Restore Into Game Pawn** in `Config/DefaultGame.ini`:

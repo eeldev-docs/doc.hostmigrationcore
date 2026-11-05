@@ -11,7 +11,8 @@ See HostMigrationCore working over Steam, either as a ready-to-run demo or as a 
 |---|---|---|
 | [**Demo** (HostMigrationExample.zip)](http://eeldev.com/tmp/HostMigrationExample.zip) | A packaged build. Unzip and run it on two machines to see host migration in action. | No |
 | [**Example project** (GitHub releases)](https://github.com/eeldev-ue4/HostMigrationExample/releases) | The Unreal Engine project, to see how it is set up. | Yes |
-| [**Demo video** (YouTube)](https://www.youtube.com/watch?v=TIQQrdchQfY) | The demo in action, if you do not have two machines at hand. | No |
+| [**Demo video**](../videos/demo) | The demo in action, if you do not have two machines at hand. | No |
+| [**Lyra setup video**](../videos/lyra-setup) | How to set up the Lyra sample project with the plugin. | Yes |
 
 :::info Unreal Engine 5.8 only
 The example project is only available for **Unreal Engine 5.8**. The plugin itself supports 5.5, 5.6, 5.7 and 5.8,
