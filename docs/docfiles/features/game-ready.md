@@ -56,18 +56,57 @@ only happen in a new match, such as a warmup phase or a match timer reset.
 
 ## Example: Lyra
 
-Lyra loads its experience after the map. Call **Notify Game Ready** once the experience has loaded, with low priority
-so the game mode has spawned the pawns first, for example in `ALyraGameMode::InitGameState`:
+Lyra loads its experience after the map, so the new host has to wait for it.
+
+:::tip Video
+[Setting up the Lyra sample project](https://www.youtube.com/watch?v=1vdb2h8woOA) (YouTube) shows these steps.
+:::
+
+1. Turn on **Wait For Game Ready** and **Restore Into Game Pawn** in `Config/DefaultGame.ini`:
+
+```ini
+[/Script/HostMigrationCore.HostMigrationSettings]
+bWaitForGameReady=true
+bRestoreIntoGamePawn=true
+```
+
+2. Add `HostMigrationCore` to the dependencies in `Source/LyraGame/LyraGame.Build.cs`:
+
+```csharp
+PrivateDependencyModuleNames.AddRange(
+	new string[] {
+		"HostMigrationCore",
+		"InputCore",
+```
+
+3. In `Source/LyraGame/GameModes/LyraGameMode.cpp`, include the subsystem:
 
 ```cpp
-ULyraExperienceManagerComponent* ExperienceComponent = GameState->FindComponentByClass<ULyraExperienceManagerComponent>();
+#include "HostMigrationSubsystem.h"
+```
+
+4. In `ALyraGameMode::InitGameState`, call **Notify Game Ready** once the experience has loaded. Register it with low
+   priority, after the existing `CallOrRegister_OnExperienceLoaded` line, so the game mode has spawned the pawns first:
+
+```cpp
 ExperienceComponent->CallOrRegister_OnExperienceLoaded_LowPriority(FOnLyraExperienceLoaded::FDelegate::CreateWeakLambda(this, [this](const ULyraExperienceDefinition*)
 {
-	if (UHostMigrationSubsystem* Migration = GetGameInstance()->GetSubsystem<UHostMigrationSubsystem>())
+	if (UHostMigrationSubsystem* Migration = GetGameInstance() ? GetGameInstance()->GetSubsystem<UHostMigrationSubsystem>() : nullptr)
 	{
 		Migration->NotifyGameReady();
 	}
 }));
+```
+
+5. Build the project.
+
+Lyra's CommonSessionSubsystem also joins sessions through a reservation beacon on the host. The new host has no
+beacon, so players who come back or join late cannot join it. Turn the beacons off in `Config/DefaultEngine.ini`, and
+in any platform config that sets them again (for example `Config/Custom/Steam/DefaultEngine.ini`):
+
+```ini
+[/Script/CommonUser.CommonSessionSubsystem]
+bUseBeacons=false
 ```
 
 Lyra keeps its match state (scores, stats, teams, the match timer) in properties without SaveGame. See

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 title: Steam
 ---
 
@@ -38,6 +38,9 @@ The most recently entered lobby is used.
 
 If players are in more than one lobby (a party lobby and a match lobby), call **Set Steam Lobby** with the match
 lobby's id on every machine. **Get Steam Lobby** returns the lobby in use.
+
+Don't destroy the session or leave the lobby while a migration runs. If your session plugin does, see
+[Session plugins](session-plugins).
 
 ## Join Session works after a migration
 

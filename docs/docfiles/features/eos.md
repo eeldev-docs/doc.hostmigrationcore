@@ -68,6 +68,9 @@ joined the lobby: the Online Subsystem session nodes, EOSCore or the EOS SDK dir
 If players are in more than one lobby (a party lobby and a match lobby), call **Set EOS Lobby** with the match lobby's
 id on every machine. **Get EOS Lobby** returns the lobby in use.
 
+Don't destroy the session or leave the lobby while a migration runs. If your session plugin does, see
+[Session plugins](session-plugins).
+
 ## Join Session works after a migration
 
 With lobby sessions, the Online Subsystem connects a joining player to the **lobby owner**. The adapter keeps the

@@ -16,7 +16,11 @@ Blueprint.
 You need:
 
 - [Wait For Game Ready](../features/game-ready#example-lyra) set up in Lyra.
+- `bUseBeacons=false` for Lyra's CommonSessionSubsystem, so players can join the new host. See
+  [Example: Lyra](../features/game-ready#example-lyra).
 - **Restore Into Game Pawn** on, so returning players keep the pawn Lyra spawns for them.
+
+The [setup video](https://www.youtube.com/watch?v=1vdb2h8woOA) (YouTube) shows how to set up the Lyra sample project.
 
 ## What gets saved
 
