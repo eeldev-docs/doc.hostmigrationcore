@@ -37,6 +37,8 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Is Restore Pending** | New host: the map is loaded but the saved state is not restored yet. |
 | **Move Party To Host** (Host Address) | Host: move every client to the host at this address, then follow them. Use it to bring your players into another match. A client that cannot connect ends up in Failed. The players stay in the old lobby: have them join the new host's lobby once they arrive, so migrations work there (see [EOS](../features/eos) and [Steam](../features/steam)). |
 
+![Move Party To Host on the Host Migration subsystem, called only when Is Local Host is true](../../../static/img/blueprints/MovePartyToHost.png)
+
 ## Subsystem events
 
 | Event | When |

@@ -19,6 +19,8 @@ Turn on **Wait For Game Ready** and call **Notify Game Ready** on the subsystem 
 3. You call **Notify Game Ready**. The plugin restores the actors, GameMode, GameState and players, announces the host
    and starts the grace period.
 
+![A custom event that runs when the match is set up, calling Notify Game Ready on the Host Migration subsystem](../../../static/img/blueprints/NotifyGameReady.png)
+
 If **Notify Game Ready** is not called within **Game Ready Timeout** (default 30 s), the plugin restores anyway.
 
 ```ini
@@ -53,6 +55,8 @@ bRestoreIntoGamePawn=true
 
 **Is Restore Pending** is true on the new host from the map load until the restore. Use it to skip things that should
 only happen in a new match, such as a warmup phase or a match timer reset.
+
+![Is Restore Pending into a Branch: Start Warmup runs only on False, in a new match](../../../static/img/blueprints/IsRestorePending.png)
 
 ## Example: Lyra
 
