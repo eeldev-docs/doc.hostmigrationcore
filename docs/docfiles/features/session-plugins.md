@@ -38,6 +38,8 @@ void UMyGameInstance::HandleNetworkFailure(UWorld* World, UNetDriver* NetDriver,
 In Blueprint, use it in the GameInstance's **Event Network Error** before the node that destroys the session or leaves
 the lobby. Only continue on **False**.
 
+![GameInstance Event NetworkError: Is Host Migration Network Failure into a Branch, Destroy Session only on False](../../../static/img/blueprints/NetworkErrorCheck.png)
+
 **Is Host Migration In Progress** is true for the whole migration. Use it for session code that runs later, for example
 a timer that checks whether the player is still in a session.
 
@@ -61,6 +63,15 @@ The Steam and EOS adapters have two fallbacks for a player who left the lobby du
 **Rejoining the lobby.** The adapters remember the lobby. If the local player is no longer in it, they join it again
 by its id and announce the new host once they are back. This only works while the lobby still exists, so at least one
 member must still be in it. On EOS the lobby also needs **Allow Join By Id**.
+
+The same happens during the match: a short internet drop can remove a player from the lobby while the game connection
+recovers. After 5 seconds outside the lobby the adapter joins it again, so the player can still find or announce the
+host at the next migration.
+
+Leaving the lobby on purpose is different. On EOS, if the lobby came from your `GameSession` and you destroy that
+session, the adapter does not join the lobby again. On Steam it can't tell the two apart, so if your game leaves the
+lobby but stays in the match for more than 5 seconds, the adapter joins it again. Leave the match first, or enter the
+next lobby within those 5 seconds.
 
 **Connecting to the successor directly.** Every client knows from the snapshot which player should become the new
 host, and the adapter can work out that player's address without the lobby (`steam.<SteamID64>` on Steam,

@@ -48,3 +48,5 @@ games, not in PIE. If your game already handles the window close (e.g. an "are y
 
 **Begin Graceful Migration** is the lower-level version for the host: it sends a final snapshot and tells everyone to
 migrate. Leave about a second later, so the messages get out.
+
+![Begin Graceful Migration on the Host Migration subsystem, then a 1 second Delay, then Open Level](../../../static/img/blueprints/LeaveAsHost.png)

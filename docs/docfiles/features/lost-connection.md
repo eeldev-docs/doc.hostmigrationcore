@@ -37,7 +37,7 @@ whose turn comes while another host is already up joins that host instead of sta
 This can happen when a slow successor comes up after the others gave up on it. Hosts watch each other's
 announcements. A host that sees a better one on two checks in a row **yields** and moves its players there.
 
-Better means, in order: more players, higher epoch, earlier in the election order.
+Better means, in order: higher epoch, more players, earlier in the election order. A host that went offline cannot update its announcement, so its old epoch keeps it from winning.
 
 The winner restores the moved players as returning players. Progress made on the losing host is lost.
 
@@ -49,6 +49,15 @@ Two cases do not count as a competing host:
 - **A host this machine could not reach.** If the yielding host cannot connect to the winner within **Max Reconnect
   Attempts**, it hosts again with a higher epoch and its saved state, and ignores that host from then on. Its players
   join it again.
+
+## The host loses its own connection
+
+When the host's internet drops, the clients migrate without it, and the old host keeps playing alone. **On Host
+Connection Lost** fires on that host when Steam reports it logged off, or when at least two clients all time out within
+5 seconds. Use it to tell the player and return to the menu. Bind it in your GameInstance, as with the other
+[subsystem events](../blueprint/blueprint-overview#subsystem-events).
+
+![Bind Event to On Host Connection Lost, then a custom event that prints the reason and opens the main menu](../../../static/img/blueprints/HostConnectionLost.png)
 
 ## LAN / Null
 

@@ -25,5 +25,7 @@ The most important ones:
 | **Restore Into Game Pawn** | off | A returning player keeps the pawn the game spawns for them, with the saved pawn's state and position loaded into it. |
 | **Pause During Grace Period** | on | Pause while players reconnect. |
 | **Show Migration Overlay** | on | Show a "reconnecting" screen during a migration. |
+| **Show Debug Overlay** | off | Draw the [debug overlay](testing#debug-overlay) on every machine. |
+| **Debug Overlay Corner** | Top Right | Screen corner the debug overlay is drawn in: Top Left, Top Right, Bottom Left or Bottom Right. |
 
 Every setting has a tooltip in **Project Settings → Plugins → Host Migration**.

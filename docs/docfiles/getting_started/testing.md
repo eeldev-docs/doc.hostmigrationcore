@@ -62,6 +62,30 @@ players in the same Steam lobby, start the match and close or kill the host. See
 EOS can be tested on one machine: run several instances, each logged in with its own Developer Authentication Tool
 credential. See [EOS](../features/eos#testing-on-one-machine).
 
+## Debug overlay
+
+The debug overlay shows what host migration sees on this machine. It is drawn in the top right corner. Change the corner with **Debug Overlay Corner**. Turn it on with one of these:
+
+- **Show Debug Overlay** in **Project Settings → Plugins → Host Migration**.
+- The console variable `HostMigration.Debug.Overlay`: `1` shows it, `-1` hides it, `0` uses the setting. From the
+  command line: `-ExecCmds="HostMigration.Debug.Overlay 1"`.
+- **Set Debug Overlay Visible** in Blueprint.
+
+| Line | What it shows |
+|---|---|
+| **HostMigration** | `HOST`, `CLIENT` or `OFFLINE`, the epoch, the state and how long it has lasted. Green on the host, blue on a client, yellow during a migration, red when it failed. |
+| **Host** | The host's player id and epoch, and `(this machine)` on the host. |
+| **Address** | The address clients connect to. |
+| **Successors** | The successors in order, with their presence in the lobby. `(you)` marks this machine, `>` the candidate a migration waits for. |
+| **Players** | Players in the match, players the new host still waits for, and players who left and can come back. |
+| **Snapshot** | On the host: sequence, records, sizes and traffic. On a client: the last snapshot it got and how long ago. |
+| **Adapter** | The adapter, and for Steam and EOS the lobby, whether this machine is in it, the members and the owner. |
+| **Election** | During a migration: the candidate and the time left before the next one is tried. |
+| **Connect** | While connecting: the address, the attempt, and `(direct)` when the client [connects without the lobby](../features/session-plugins#what-the-adapters-do). |
+
+Every machine should show the same epoch, host and successors. A machine with a different epoch or host is the first
+place to look when a migration goes wrong.
+
 ## Tips
 
 - Bind **On State Changed** in the GameInstance and print the state to see where a migration is. See the

@@ -23,7 +23,7 @@ An adapter answers three questions:
 | `PublishHostReady(Epoch, NumPlayers)` | Announce that this machine hosts. Called when hosting starts and when the player count changes. |
 | `ClearHostReady()` | This machine stopped hosting. |
 | `GetAnnouncedHosts(OutHosts)` | Every announcement visible in the backend. Return false if there is no such channel. |
-| `FindAnnouncedHost(...)` | For players not connected yet. Default: most players, then highest epoch. |
+| `FindAnnouncedHost(...)` | For players not connected yet. Default: highest epoch, then most players. |
 | `ScoreCandidate(PlayerState)` | Host side, lower is better. Default: ping. |
 | `BeginWaitingForHost` / `StopWaitingForHost` | Client side, while waiting for a candidate. |
 | `Initialize` / `Deinitialize` | Lifetime, tied to the subsystem. |

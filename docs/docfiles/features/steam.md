@@ -39,6 +39,18 @@ The most recently entered lobby is used.
 If players are in more than one lobby (a party lobby and a match lobby), call **Set Steam Lobby** with the match
 lobby's id on every machine. **Get Steam Lobby** returns the lobby in use.
 
+![Set Steam Lobby with the match lobby's id, then printing Get Steam Lobby](../../../static/img/blueprints/SetSteamLobby.png)
+
+**Entering another lobby** counts as leaving the match. When the adapter switches to a lobby it detected, nothing from
+the old match is announced there, and a host with players hands the old match over first, as with **Begin Graceful
+Migration**. **Set Steam Lobby** does not do this. If your game moves a running match to a new lobby, call it with the
+new lobby's id.
+
+**After Move Party To Host**, the players are connected to the new host but still members of the old lobby. The
+plugin moves the connections, not the lobby membership. If the new host then goes down, the players look for the next
+host in the old lobby and don't find it. Have every player join the new host's lobby once they have arrived, or call
+**Set Steam Lobby** with its id. They are clients of the new host by then, so entering that lobby does not hand anything over.
+
 Don't destroy the session or leave the lobby while a migration runs. If your session plugin does, see
 [Session plugins](session-plugins).
 
@@ -69,7 +81,7 @@ things that point at the old host: lobby data your matchmaking reads, rich prese
 advertise.
 
 Players who are not connected yet (late joiners, returning players) can use **Join Session** (see above), or call
-**Find Host In Lobby** to get the current host's address. If several members have announced, the one with the most players wins, then the highest epoch.
+**Find Host In Lobby** to get the current host's address. If several members have announced, the one with the highest epoch wins, then the most players.
 
 ## Crash timing
 

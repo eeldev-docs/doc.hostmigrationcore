@@ -35,6 +35,7 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Get Snapshot Stats** | Host: snapshot sizes and traffic. |
 | **Notify Game Ready** | With **Wait For Game Ready**: the game has set up the match, the new host can restore. See [Games that set up the match later](../features/game-ready). |
 | **Is Restore Pending** | New host: the map is loaded but the saved state is not restored yet. |
+| **Move Party To Host** (Host Address) | Host: move every client to the host at this address, then follow them. Use it to bring your players into another match. A client that cannot connect ends up in Failed. The players stay in the old lobby: have them join the new host's lobby once they arrive, so migrations work there (see [EOS](../features/eos) and [Steam](../features/steam)). |
 
 ## Subsystem events
 
@@ -43,6 +44,7 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **On State Changed** (Old State, New State) | Every state change, on every machine. |
 | **On Player Restored** (Player Controller) | Host: a returning player got their state back. |
 | **On Host Changed** (Host Id, Host Address, Is Local Host, Epoch) | The session has a new host. Use it to update lobby data or rich presence. |
+| **On Host Connection Lost** (Reason) | Host: this machine seems to have lost its own connection. Steam reports it logged off, or at least two clients and all of them timed out within 5 seconds. The clients migrate without it; show a message or return to the menu. |
 
 Bind them in your **GameInstance** (Event Init). A migration loads the map again, which destroys actors and widgets
 together with the events bound in them.
@@ -58,6 +60,7 @@ together with the events bound in them.
 | **Is Host Migration In Progress** | Same as Is Migrating, from any world context. |
 | **Is Migration Host** | True on the machine that hosts. |
 | **Unique Net Id To String** | The string form used for player ids. |
+| **Set Debug Overlay Visible** | Shows or hides the [debug overlay](../getting_started/testing#debug-overlay). |
 
 ## Steam
 
