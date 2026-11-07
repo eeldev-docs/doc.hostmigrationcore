@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.10.2">
 <title data-rh="true">EOS | HostMigrationCore Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://hostmigrationcore.eeldev.com/docfiles/features/eos"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="EOS | HostMigrationCore Documentation"><meta data-rh="true" name="description" content="Setup"><meta data-rh="true" property="og:description" content="Setup"><link data-rh="true" rel="icon" href="/img/eeldev_icon.png"><link data-rh="true" rel="canonical" href="https://hostmigrationcore.eeldev.com/docfiles/features/eos"><link data-rh="true" rel="alternate" href="https://hostmigrationcore.eeldev.com/docfiles/features/eos" hreflang="en"><link data-rh="true" rel="alternate" href="https://hostmigrationcore.eeldev.com/docfiles/features/eos" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"EOS","item":"https://hostmigrationcore.eeldev.com/docfiles/features/eos"}]}</script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"><link rel="stylesheet" href="/assets/css/styles.454b5c30.css">
-<script src="/assets/js/runtime~main.4e051391.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.bd350bbd.js" defer="defer"></script>
 <script src="/assets/js/main.0fd8ba18.js" defer="defer"></script>
 </head>
 <body>
@@ -58,6 +58,17 @@ member of. It also picks up the lobby behind the <code>GameSession</code> of the
 joined the lobby: the Online Subsystem session nodes, EOSCore or the EOS SDK directly.</p>
 <p>If players are in more than one lobby (a party lobby and a match lobby), call <strong>Set EOS Lobby</strong> with the match lobby&#x27;s
 id on every machine. <strong>Get EOS Lobby</strong> returns the lobby in use.</p>
+<p><img decoding="async" loading="lazy" alt="Set EOS Lobby with the match lobby&amp;#39;s id, then printing Get EOS Lobby" src="/assets/images/SetEOSLobby-64980e9c77473da48c77660070e9c66a.png" width="1528" height="632" class="img_ev3q"></p>
+<p><strong>Entering another lobby</strong> counts as leaving the match. EOS does not report your own joins and leaves, so the adapter
+checks every second that the local player is still in the lobby, and picks up the lobby of your <code>GameSession</code> once it
+has left the old one. When the adapter switches to a lobby it detected, nothing from
+the old match is announced there, and a host with players hands the old match over first, as with <strong>Begin Graceful
+Migration</strong>. <strong>Set EOS Lobby</strong> does not do this. If your game moves a running match to a new lobby, call it with the
+new lobby&#x27;s id.</p>
+<p><strong>After Move Party To Host</strong>, the players are connected to the new host but still members of the old lobby. The
+plugin moves the connections, not the lobby membership. If the new host then goes down, the players look for the next
+host in the old lobby and don&#x27;t find it. Have every player join the new host&#x27;s lobby once they have arrived, or call
+<strong>Set EOS Lobby</strong> with its id. They are clients of the new host by then, so entering that lobby does not hand anything over.</p>
 <p>Don&#x27;t destroy the session or leave the lobby while a migration runs. If your session plugin does, see
 <a class="" href="/docfiles/features/session-plugins">Session plugins</a>.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="join-session-works-after-a-migration">Join Session works after a migration<a href="#join-session-works-after-a-migration" class="hash-link" aria-label="Direct link to Join Session works after a migration" title="Direct link to Join Session works after a migration" translate="no">​</a></h2>
