@@ -26,6 +26,8 @@ An adapter answers three questions:
 | `FindAnnouncedHost(...)` | For players not connected yet. Default: highest epoch, then most players. |
 | `ScoreCandidate(PlayerState)` | Host side, lower is better. Default: ping. |
 | `BeginWaitingForHost` / `StopWaitingForHost` | Client side, while waiting for a candidate. |
+| `IsOnline()` | False fires **On Host Connection Lost** on the host. Default: true. |
+| `GetDebugInfo(OutLines)` | Extra text for the **Adapter** line of the [debug overlay](../getting_started/testing#debug-overlay). |
 | `Initialize` / `Deinitialize` | Lifetime, tied to the subsystem. |
 
 If your backend pushes events, call `UHostMigrationSubsystem::HandleHostAnnounced` when an announcement arrives. When

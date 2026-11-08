@@ -71,6 +71,10 @@ The debug overlay shows what host migration sees on this machine. It is drawn in
   command line: `-ExecCmds="HostMigration.Debug.Overlay 1"`.
 - **Set Debug Overlay Visible** in Blueprint.
 
+:::caution
+The overlay also works in Shipping builds and shows the host's address. Keep it off in released games.
+:::
+
 | Line | What it shows |
 |---|---|
 | **HostMigration** | `HOST`, `CLIENT` or `OFFLINE`, the epoch, the state and how long it has lasted. Green on the host, blue on a client, yellow during a migration, red when it failed. |
@@ -81,7 +85,6 @@ The debug overlay shows what host migration sees on this machine. It is drawn in
 | **Snapshot** | On the host: sequence, records, sizes and traffic. On a client: the last snapshot it got and how long ago. |
 | **Adapter** | The adapter, and for Steam and EOS the lobby, whether this machine is in it, the members and the owner. |
 | **Election** | During a migration: the candidate and the time left before the next one is tried. |
-| **Connect** | While connecting: the address, the attempt, and `(direct)` when the client [connects without the lobby](../features/session-plugins#what-the-adapters-do). |
 
 Every machine should show the same epoch, host and successors. A machine with a different epoch or host is the first
 place to look when a migration goes wrong.

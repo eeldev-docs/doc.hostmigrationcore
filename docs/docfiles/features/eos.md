@@ -77,6 +77,10 @@ the old match is announced there, and a host with players hands the old match ov
 Migration**. **Set EOS Lobby** does not do this. If your game moves a running match to a new lobby, call it with the
 new lobby's id.
 
+**Dropping out of the lobby during a match:** the adapter joins the lobby again after 5 seconds, then retries every 10
+seconds. It does not rejoin a lobby that came from your `GameSession` once the `GameSession` has moved to another lobby.
+A lobby the player left outside a match is forgotten.
+
 **After Move Party To Host**, the players are connected to the new host but still members of the old lobby. The
 plugin moves the connections, not the lobby membership. If the new host then goes down, the players look for the next
 host in the old lobby and don't find it. Have every player join the new host's lobby once they have arrived, or call
