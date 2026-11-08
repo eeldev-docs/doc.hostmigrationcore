@@ -53,7 +53,7 @@ Two cases do not count as a competing host:
 ## The host loses its own connection
 
 When the host's internet drops, the clients migrate without it, and the old host keeps playing alone. **On Host
-Connection Lost** fires on that host when Steam reports it logged off, or when at least two clients all time out within
+Connection Lost** fires on that host when Steam or EOS reports it logged off, or when at least two clients all time out within
 5 seconds. Use it to tell the player and return to the menu. Bind it in your GameInstance, as with the other
 [subsystem events](../blueprint/blueprint-overview#subsystem-events).
 

@@ -46,7 +46,7 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **On State Changed** (Old State, New State) | Every state change, on every machine. |
 | **On Player Restored** (Player Controller) | Host: a returning player got their state back. |
 | **On Host Changed** (Host Id, Host Address, Is Local Host, Epoch) | The session has a new host. Use it to update lobby data or rich presence. |
-| **On Host Connection Lost** (Reason) | Host: this machine seems to have lost its own connection. Steam reports it logged off, or at least two clients and all of them timed out within 5 seconds. The clients migrate without it; show a message or return to the menu. |
+| **On Host Connection Lost** (Reason) | Host: this machine seems to have lost its own connection. Steam or EOS reports it logged off, or at least two clients and all of them timed out within 5 seconds. The clients migrate without it; show a message or return to the menu. |
 
 Bind them in your **GameInstance** (Event Init). A migration loads the map again, which destroys actors and widgets
 together with the events bound in them.
