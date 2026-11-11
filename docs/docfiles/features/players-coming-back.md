@@ -27,6 +27,20 @@ Host Migration Id.
 
 When a record expires, the player's unpossessed pawn is destroyed (**Destroy Pawn When Inactive Expires**).
 
+## Kicked players
+
+Kick players with **Kick Player** (Player Controller, Reason) on the subsystem, on the host:
+
+- The client is told it was removed, then kicked through the game session.
+- It does not rejoin the host or start a migration. **On Removed By Host** (Reason) fires on it, and it leaves through
+  Unreal's normal disconnect handling. **Is Host Migration Network Failure** returns false for that disconnect, so
+  your own error handling runs.
+- The host keeps no state for the player, so they do not get it back if they return.
+
+A player removed another way (the GameSession's Kick Player, or destroying the PlayerController) is also not kept on
+the host. The client treats it as a kick when its PlayerController is destroyed while the connection is still open,
+and fires **On Removed By Host** with an empty reason. Use **Kick Player** when you can: it does not depend on this.
+
 ## New players
 
 Players who join after a migration join like any other player. Players who are not connected yet can find the current

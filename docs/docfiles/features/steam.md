@@ -74,6 +74,8 @@ So players coming back, or joining late, can use the usual **Find Sessions** and
 |---|---|
 | Is a player still in the session? | Lobby membership. |
 | Where is the host? | The host's own lobby member data: `hm_addr`, `hm_epoch`, `hm_players`. |
+| Is the host still running? | `hm_beat`, updated every 5 s while hosting. |
+| Is the successor still loading? | `hm_loading`, set while the successor loads the map. |
 | What is my address? | `steam.<my SteamID64>`. |
 
 Member data of a player who left disappears with them, so only live hosts are listed.
@@ -90,4 +92,5 @@ Players who are not connected yet (late joiners, returning players) can use **Jo
 ## Crash timing
 
 After a host crash, clients first try to rejoin it while Steam still lists it in the lobby. The migration starts when
-Steam removes the crashed host from the lobby, so a crash takes longer than a graceful leave.
+Steam removes the crashed host from the lobby, or when its `hm_beat` has not changed for 15 seconds, whichever comes
+first. A crash still takes longer than a graceful leave.

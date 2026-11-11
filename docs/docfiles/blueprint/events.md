@@ -34,6 +34,10 @@ again. Restart timers, effects and AI here.
 The events show up under **Interfaces** in the My Blueprint panel once the interface is added. Only `RemainingTime`
 needs **SaveGame**. The timer handle is not valid on the new host, and **On Host Migration Restored** sets it again.
 
+To save a point in time instead (for example `RoundStartTime = Get Game Time in Seconds`), convert it with **To
+Restored World Time** on the subsystem in **On Host Migration Restored**. The new world's clock starts from zero. See
+[World time](../features/what-gets-saved#world-time).
+
 ## Showing a "reconnecting" message
 
 The built-in overlay already does this. For your own UI, bind **On State Changed** on the subsystem, or set an

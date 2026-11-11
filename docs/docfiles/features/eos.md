@@ -103,6 +103,8 @@ So players coming back, or joining late, can use the usual **Find Sessions** and
 |---|---|
 | Is a player still in the session? | Lobby membership. |
 | Where is the host? | The host's own lobby member attributes: `hm_addr`, `hm_epoch`, `hm_players`, `hm_id`. |
+| Is the host still running? | `hm_beat`, updated every 5 s while hosting. |
+| Is the successor still loading? | `hm_loading`, set while the successor loads the map. |
 | What is my address? | The net driver's address, or `EOS:<my ProductUserId>`. |
 
 Member attributes of a player who left disappear with them, so only live hosts are listed.
@@ -126,11 +128,12 @@ the wait map for a few seconds before they reach the new map. This needs **Rejoi
 
 ## Crash timing
 
-After a host crash, clients first try to rejoin it while EOS still lists it in the lobby. The migration starts when EOS
-reports the crashed host as gone, about 30 seconds after the crash, so a crash takes longer than a graceful leave.
+After a host crash, clients first try to rejoin it while EOS still lists it in the lobby. EOS reports the crashed
+host as gone about 30 seconds after the crash, but clients migrate earlier when the host's `hm_beat` has not changed
+for 15 seconds. A crash still takes longer than a graceful leave.
 
 A game that quits should leave the lobby before it shuts down (`EOS_Lobby_LeaveLobby`). Otherwise EOS keeps it in the
-lobby for the same 30 seconds, as if it had crashed.
+lobby as if it had crashed.
 
 Over the internet, give the successor a bit more time to load and announce itself:
 

@@ -24,6 +24,35 @@ A placed actor that was destroyed before the migration stays destroyed on the ne
   C++. Structs, arrays, maps and object references are supported. For structs, see [below](#structs).
 - **Custom data (C++).** Implement [`IHostMigratable`](../cpp/host-migratable) for anything SaveGame cannot express.
 - The actor's transform is always saved.
+- A restored or respawned actor already has its saved Host Migration Id in **BeginPlay**.
+
+## Owner, Instigator and attachments
+
+- **Owner and Instigator** are restored when they point at a migrated actor. An owner that is a player's
+  PlayerController is set again once that player is connected: right away for the new host's own player, and on
+  reconnect for players who return during the grace period.
+- **Attachments:** an actor attached to a migrated actor is attached again, to the same component (matched by name)
+  and socket.
+
+## AI controllers
+
+A pawn that had an AI controller gets one again on the new host.
+
+- **The controller has a Host Migration Id:** it is migrated like any other actor and possesses the pawn again, so
+  its SaveGame variables come along.
+- **No id:** a new controller of the same class is spawned. Its blackboard, behavior tree progress and other state
+  start fresh. A pawn that already got a controller on spawn (**Auto Possess AI**) keeps that one.
+
+## Match state
+
+With a GameMode based on `AGameMode` (not `AGameModeBase`), a match that was in progress is started again on the new
+host, and a match that had ended is ended again. Custom match states are not restored.
+
+## World time
+
+The new host's world clock starts from zero, so a **Get Game Time in Seconds** value saved on the old host means
+nothing on the new one. Convert it with **To Restored World Time** on the subsystem. **Get Migrated World Time
+Offset** returns the difference. Both are set before **On Host Migration Restored** runs.
 
 ## Components
 
@@ -98,6 +127,9 @@ Raw pointers, `TObjectPtr`, `TWeakObjectPtr` and references written through `IHo
 - Variables without the SaveGame flag, including struct members without it.
 - Objects created at runtime that are not actors or components (`NewObject`, "Construct Object").
 - Actors without a Host Migration Id.
+- Owners that are neither migrated actors nor a player's PlayerController (for example a PlayerState), and owners
+  whose player does not return during the grace period.
+- The state of AI controllers without a Host Migration Id.
 - Timers, animation state, physics velocity, in-flight RPCs. Save what you need in
   [On Host Migration Save](../blueprint/events) and restart it in **On Host Migration Restored**.
 - Progress made after the last snapshot (at most one Snapshot Interval). A graceful leave sends a final snapshot.

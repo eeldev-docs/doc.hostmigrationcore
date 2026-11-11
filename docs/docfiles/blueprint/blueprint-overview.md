@@ -35,6 +35,11 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Get Snapshot Stats** | Host: snapshot sizes and traffic. |
 | **Notify Game Ready** | With **Wait For Game Ready**: the game has set up the match, the new host can restore. See [Games that set up the match later](../features/game-ready). |
 | **Is Restore Pending** | New host: the map is loaded but the saved state is not restored yet. |
+| **Kick Player** (Player Controller, Reason) | Host: remove a player. The client does not rejoin or migrate. See [Kicked players](../features/players-coming-back#kicked-players). |
+| **Was Removed By Host** | Client: this machine was kicked from the match. |
+| **Is Migration Network Failure** (Failure Type) | True when a network failure starts or belongs to a migration. See [Session plugins](../features/session-plugins). |
+| **To Restored World Time** (Saved World Time) | New host: converts a world time saved on the old host to this world's clock. See [World time](../features/what-gets-saved#world-time). |
+| **Get Migrated World Time Offset** | New host: the difference between the old and the new world clock. |
 | **Move Party To Host** (Host Address) | Host: move every client to the host at this address, then follow them. Use it to bring your players into another match. A client that cannot connect ends up in Failed. The players stay in the old lobby: have them join the new host's lobby once they arrive, so migrations work there (see [EOS](../features/eos) and [Steam](../features/steam)). |
 
 ![Move Party To Host on the Host Migration subsystem, called only when Is Local Host is true](../../../static/img/blueprints/MovePartyToHost.png)
@@ -47,6 +52,8 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **On Player Restored** (Player Controller) | Host: a returning player got their state back. |
 | **On Host Changed** (Host Id, Host Address, Is Local Host, Epoch) | The session has a new host. Use it to update lobby data or rich presence. |
 | **On Host Connection Lost** (Reason) | Host: this machine seems to have lost its own connection. Steam or EOS reports it logged off, or at least two clients and all of them timed out within 5 seconds. The clients migrate without it; show a message or return to the menu. |
+| **On Snapshot Too Large** (Snapshot Bytes, Max Snapshot Bytes) | Host: a full snapshot went over **Max Snapshot Bytes** and is not sent. See [Snapshot traffic](../features/snapshot-traffic#size-limit). |
+| **On Removed By Host** (Reason) | Client: the host kicked this player. |
 
 Bind them in your **GameInstance** (Event Init). A migration loads the map again, which destroys actors and widgets
 together with the events bound in them.
@@ -61,6 +68,7 @@ together with the events bound in them.
 | **Find Actor By Migration Id** | The actor that carries an id now. |
 | **Is Host Migration In Progress** | Same as Is Migrating, from any world context. |
 | **Is Migration Host** | True on the machine that hosts. |
+| **Is Host Migration Network Failure** (Failure Type) | Same as Is Migration Network Failure, from any world context. |
 | **Unique Net Id To String** | The string form used for player ids. |
 | **Set Debug Overlay Visible** | Shows or hides the [debug overlay](../getting_started/testing#debug-overlay). |
 

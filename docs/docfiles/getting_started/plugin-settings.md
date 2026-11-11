@@ -16,6 +16,10 @@ The most important ones:
 | **Adapter Class** | empty | The online backend. **Steam Adapter** for Steam, **EOS Adapter** for EOS. Empty: picked from `DefaultPlatformService` (Steam, SteamCore, EOS, EOSCore), otherwise Null. |
 | **Client Wait Map** | none | Empty map clients wait in. Strongly recommended. |
 | **Snapshot Interval** | 3 s | How often the host sends state. Lower = less lost progress, more traffic. |
+| **Max Snapshot Bytes** | 512 KB | Compressed size above which a full snapshot is not sent. See [Snapshot traffic](../features/snapshot-traffic#size-limit). |
+| **Candidate Timeout** | 12 s | How long clients wait for a successor to announce itself. |
+| **Max Candidate Load Time** | 90 s | How long clients keep waiting for a successor that reports it is still loading the map. |
+| **Rejoin Timeout** | 20 s | How long a client tries to rejoin a host that is still in the lobby. 0 = migrate right away. |
 | **Connect Attempt Timeout** | 30 s | How long one connection attempt may take before it is cancelled and retried. 0 = no limit. |
 | **Reconnect Grace Period** | 30 s | How long the new host waits for previous players. |
 | **Inactive Player Timeout** | 300 s | How long a player who left keeps their state for a rejoin. |

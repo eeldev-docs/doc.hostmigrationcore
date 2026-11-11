@@ -43,8 +43,11 @@ private:
 | Function | When |
 |---|---|
 | `SaveMigrationState(FArchive&)` | On the host, when a snapshot is built, after SaveGame properties are written. |
-| `RestoreMigrationState(FArchive&)` | On the new host, before BeginPlay. Must read exactly what was written. |
+| `RestoreMigrationState(FArchive&)` | On the new host, before BeginPlay. Should read exactly what was written. |
 | `PostMigrationRestore()` | On the new host, once every migrated actor has been restored. |
+
+Each object's data is stored with its length. A `RestoreMigrationState` that reads more or less than
+`SaveMigrationState` wrote only breaks that object, not its components or the actors after it.
 
 Object references written to the archive (`Ar << SomeActorPtr`) are stored by migration id and resolve on the new host,
 the same as SaveGame references. You can also store an `FGuid` and look it up with

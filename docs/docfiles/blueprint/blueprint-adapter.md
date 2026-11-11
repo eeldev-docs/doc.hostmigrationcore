@@ -22,7 +22,15 @@ C++.
 | **Clear Host Ready** | Announcements. Remove what Publish Host Ready wrote. |
 | **Get Announced Hosts** (out Hosts) | Announcements. Return every announced host and **true**. |
 | **Get Member Presence** (Player Id) | Rejoin. Present, Gone or Unknown. |
+| **Publish Heartbeat** (Beat) | Heartbeat. Write the number to your lobby. Called every 5 s while hosting. |
+| **Get Heartbeat** (Player Id, out Beat) | Heartbeat. Read the number that player wrote and return **true**. Clients use it to notice a host that is still listed but no longer running. |
+| **Publish Host Loading** (Epoch) | Loading. Write that this machine is loading the map as the successor for this epoch. |
+| **Is Candidate Loading** (Candidate, Epoch) | Loading. True if that candidate wrote it is loading for this epoch. Clients then keep waiting up to **Max Candidate Load Time**. |
 | **Score Candidate** (Player State) | Optional. Ranks successors, lower is better. Default: ping. |
+| **Is Candidate Available** (Candidate) | Optional. False skips the candidate in the election. Default: not known to be gone. |
+| **Is Online** | Optional. False fires **On Host Connection Lost** on the host. Default: true. |
+| **Can See Lobby** | Optional. False when this machine cannot read the lobby; clients then connect to the candidate directly. Default: true. |
+| **Get Direct Connect Addresses** (Candidate, out Addresses) | Optional. Addresses to try when **Can See Lobby** is false. Default: Get Connect Address. |
 
 The plugin calls these events. You cannot call them from your own graph, so put anything you need in more than one
 place, such as this machine's address, in a function of your own.
@@ -55,6 +63,9 @@ place, such as this machine's address, in a function of your own.
   and resolved.
 - **Plus presence:** a player whose connection drops while the host is still there rejoins the host instead of
   migrating.
+- **Plus heartbeat:** a host that crashed but is still listed is noticed after 15 s instead of when your backend
+  drops it.
+- **Plus loading:** clients keep waiting for a successor that is still loading a large map.
 
 ## Calls
 

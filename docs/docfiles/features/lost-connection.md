@@ -17,8 +17,15 @@ lobby membership).
   and gets its state back as a returning player. No migration, so a player with a hiccup never splits off into a match
   of their own.
 - **The host leaves the session meanwhile:** the client migrates after all.
+- **The host is still listed but has stopped running:** every host updates a heartbeat in the lobby every 5 seconds.
+  If it has not changed for 15 seconds, the client migrates without waiting for the lobby to drop the crashed host.
+  This check is skipped when the client could not follow the host to a new map, because a host that is loading a map
+  does not update its heartbeat.
 - **The host stays but cannot be reached:** the client gives up (**Migrate When Host Unreachable** off, the default)
-  or migrates anyway (on).
+  or migrates anyway (on). Even with it on, a client does not migrate while the host's announcement shows that it
+  still has other players: then only this client lost the host, and it leaves instead of starting a match of its own.
+- **The host kicked the player:** the client does neither. See
+  [Kicked players](players-coming-back#kicked-players).
 
 ## Connecting to the new host
 
@@ -26,6 +33,10 @@ Connections are retried **Max Reconnect Attempts** times, **Reconnect Retry Dela
 connected within **Connect Attempt Timeout** (30 s, 0 = no limit) is cancelled and counts as failed. If that host stays
 unreachable, the client moves on to the next candidate. A candidate that does not announce itself within
 **Candidate Timeout** is skipped.
+
+A successor publishes that it is loading the map. Clients keep waiting for a candidate that is still loading past
+**Candidate Timeout**, up to **Max Candidate Load Time** (90 s) from when they started waiting for it, so a slow
+machine on a large map is not skipped.
 
 ## First announcement wins
 
