@@ -21,10 +21,11 @@ Or in `Config/DefaultGame.ini`:
 AdapterClass=/Script/HostMigrationCoreSteam.HostMigrationAdapter_Steam
 ```
 
-## 2. Set a wait map
+## 2. Optional: set a wait map
 
-Create an empty map and set it as **Client Wait Map**. Clients load it while the new host starts up. Without it they
-wait in the game's default map, usually the main menu.
+Clients wait while the new host starts up. By default they stay in the match world, with the connection closed. The
+engine's usual disconnect travel to the main menu is held back. If you would rather have them wait somewhere else,
+create an empty map and set it as **Client Wait Map**.
 
 ## 3. Mark actors that should survive
 
@@ -54,7 +55,6 @@ That's it. Crash the host (or close it) and the match continues on one of the ot
 
 ## Next steps
 
-- [How it works](how-it-works): what happens during a migration.
 - [Events](../blueprint/events): restart timers and effects after a migration.
 - [Plugin Settings](plugin-settings): timings, pause, overlay.
 - [Testing](testing): try it locally.

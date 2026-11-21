@@ -21,7 +21,47 @@ starting with a full snapshot.
 - **Players who stepped away** keep their PlayerState data across map changes. Their pawn belonged to the old map, so
   they get a new one.
 - Players moving with a seamless travel are not treated as leaving.
-- Seamless travel keeps PlayerStates only through your PlayerState's `CopyProperties`, as usual in Unreal.
+- Seamless travel keeps PlayerState data only through your PlayerState's `CopyProperties`, as usual in Unreal. See
+  below.
+
+### Keep PlayerState data through seamless travel
+
+On a seamless travel, Unreal gives every connected player, the host included, a **new PlayerState** on the new map.
+It then copies the old one over with `CopyProperties`. The base class copies only its own fields (name, score, unique
+id and so on). **Any variable you added to your PlayerState is reset to its default** unless you copy it yourself.
+
+This is standard Unreal behaviour, and the plugin does not change it. But it can look like a migration problem:
+
+- **Players who stepped away** before the travel keep all their `SaveGame` PlayerState data. The plugin stores them
+  and restores them when they come back.
+- **Connected players** keep only what `CopyProperties` copies.
+- **A migration after the travel** saves whatever the PlayerStates hold at that moment. It carries over values that
+  were already reset.
+
+So after a seamless travel, a player who left and came back can have more points than the players who stayed.
+
+**C++:** override `CopyProperties` and copy every field you want to keep:
+
+```cpp
+// MyPlayerState.h
+virtual void CopyProperties(APlayerState* PlayerState) override;
+
+// MyPlayerState.cpp
+void AMyPlayerState::CopyProperties(APlayerState* PlayerState)
+{
+	Super::CopyProperties(PlayerState);
+	if (AMyPlayerState* NewPlayerState = Cast<AMyPlayerState>(PlayerState))
+	{
+		NewPlayerState->Points = Points;
+	}
+}
+```
+
+**Blueprint:** in your PlayerState Blueprint, implement the **Event Copy Properties** event. Cast its `New Player
+State` to your class and set your variables on it.
+
+A non-seamless travel reconnects everyone, so PlayerState data is not carried over at all there, with or without the
+plugin. Keep data that must survive it somewhere else, such as the GameInstance or a save game.
 
 ## Leaving the match
 

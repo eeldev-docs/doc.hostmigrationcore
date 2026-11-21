@@ -15,7 +15,8 @@ title: EOS
    use to find each other again. A session created with `bUseLobbiesIfAvailable = true` is a lobby. A plain EOS
    session (without lobbies) is not enough.
 4. Log every player in with **EOS Connect**, so they have a Product User Id. The adapter uses the first logged-in
-   Connect user.
+   Connect user. With several EOS platforms or users in one process (PIE, EOSCore), it uses the platform where the
+   local player's Product User Id is logged in.
 
 ```ini
 [/Script/Engine.GameEngine]
@@ -95,6 +96,9 @@ With lobby sessions, the Online Subsystem connects a joining player to the **lob
 current host as lobby owner: whoever owns the lobby promotes the current host. This takes a second or two after a
 migration.
 
+This is **Manage Lobby Ownership** (on by default). Turn it off if your game uses the lobby owner for something of its
+own. Then players who join later do not find the new host through **Join Session**. Use **Find Host In Lobby** instead.
+
 So players coming back, or joining late, can use the usual **Find Sessions** and **Join Session** nodes.
 
 ## What the adapter does
@@ -103,11 +107,14 @@ So players coming back, or joining late, can use the usual **Find Sessions** and
 |---|---|
 | Is a player still in the session? | Lobby membership. |
 | Where is the host? | The host's own lobby member attributes: `hm_addr`, `hm_epoch`, `hm_players`, `hm_id`. |
-| Is the host still running? | `hm_beat`, updated every 5 s while hosting. |
+| Is the host still running? | `hm_beat`, updated every **Heartbeat Interval** (5 s) while hosting. |
 | Is the successor still loading? | `hm_loading`, set while the successor loads the map. |
 | What is my address? | The net driver's address, or `EOS:<my ProductUserId>`. |
 
 Member attributes of a player who left disappear with them, so only live hosts are listed.
+
+Attribute writes are merged and sent as one lobby update at a time. When EOS answers *too many requests*, the adapter
+waits and tries again, so a busy lobby does not lose announcements.
 
 ## After a migration
 
@@ -130,7 +137,7 @@ the wait map for a few seconds before they reach the new map. This needs **Rejoi
 
 After a host crash, clients first try to rejoin it while EOS still lists it in the lobby. EOS reports the crashed
 host as gone about 30 seconds after the crash, but clients migrate earlier when the host's `hm_beat` has not changed
-for 15 seconds. A crash still takes longer than a graceful leave.
+for **Heartbeat Timeout** (15 s). A crash still takes longer than a graceful leave.
 
 A game that quits should leave the lobby before it shuts down (`EOS_Lobby_LeaveLobby`). Otherwise EOS keeps it in the
 lobby as if it had crashed.

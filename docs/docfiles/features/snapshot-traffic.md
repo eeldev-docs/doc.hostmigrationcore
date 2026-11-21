@@ -15,6 +15,9 @@ a player, the globals) that changed, plus removals. New clients get a full snaps
 Every delta carries a hash of the complete state. If a client's rebuilt snapshot does not match, or a delta does not
 follow the snapshot it has, the client asks the host for a full snapshot. This happens by itself.
 
+The host remembers the last 8 states. A client that fell a few sequences behind (a slow connection, a large transfer)
+gets a delta from the state it holds instead of a new full snapshot.
+
 Measured with 4 players, 300 static props and gameplay going on:
 
 | | Size |
@@ -29,6 +32,9 @@ Measured with 4 players, 300 static props and gameplay going on:
 - **Snapshot Interval:** lower means less progress lost on a crash, but more traffic.
 - **Use Delta Snapshots:** turn off to always send full snapshots.
 - **Chunk Size:** compressed bytes per RPC.
+- **Max Snapshot Bytes Per Second Per Client:** caps the snapshot traffic to each client. 0 (the default) means no
+  limit, with one chunk per frame. A graceful handover waits until the queued data has been sent, so a low cap makes
+  leaving slower.
 - **Get Snapshot Stats** (host) returns the size of the last full snapshot, last delta size, changed records, bytes per second and counts of
   fulls, deltas and resyncs. A summary is logged every 30 s.
 - Only mark what must survive as SaveGame. Large records that change often (big inventories) are resent whole every

@@ -37,6 +37,24 @@ When the game has already spawned a pawn for a player and that player's saved pa
 uses the game's pawn: it moves it to the saved position and loads the saved state into it. Everything the game set up on
 the pawn stays. If the classes differ, the saved pawn is spawned and possessed, and the game's pawn is destroyed.
 
+## Actors the game spawns at runtime
+
+Actors with a Host Migration Id that your game spawns at runtime (in BeginPlay, from a spawner, in the GameMode) are
+spawned again by the game on the new host. They are also in the snapshot, so without cleanup they would exist twice.
+
+With **Destroy Unsaved Runtime Actors** (on by default), the new host destroys the runtime actors it spawned itself
+that are not in the snapshot. This happens after BeginPlay, or after **Notify Game Ready** with **Wait For Game
+Ready**. The log says *Destroying ...: spawned by the game on the new host but not in the snapshot*.
+
+- Controllers, PlayerStates, the GameState, the GameMode and players' pawns are never destroyed.
+- Add classes to **Keep Unsaved Runtime Actor Classes** to keep their actors.
+
+```ini
+[/Script/HostMigrationCore.HostMigrationSettings]
+bDestroyUnsavedRuntimeActors=true
++KeepUnsavedRuntimeActorClasses=/Game/Blueprints/BP_Spawner.BP_Spawner_C
+```
+
 ## Returning players
 
 A player who comes back later (after a migration, or after stepping away) logs in before the game has spawned a pawn

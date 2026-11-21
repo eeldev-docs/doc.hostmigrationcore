@@ -39,7 +39,12 @@ Kick players with **Kick Player** (Player Controller, Reason) on the subsystem, 
 
 A player removed another way (the GameSession's Kick Player, or destroying the PlayerController) is also not kept on
 the host. The client treats it as a kick when its PlayerController is destroyed while the connection is still open,
-and fires **On Removed By Host** with an empty reason. Use **Kick Player** when you can: it does not depend on this.
+and fires **On Removed By Host** with an empty reason.
+
+The client checks this one second after its PlayerController goes away. It does not count as a kick when the
+connection has closed by then, when a new PlayerController exists, or during a map change (seamless travel). If the
+host gives it a new PlayerController later, the kick is undone. Use **Kick Player** when you can: it does not depend
+on this.
 
 ## New players
 

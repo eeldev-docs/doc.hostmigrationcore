@@ -36,6 +36,12 @@ The adapter detects the lobby by itself. It listens for Steam's `LobbyEnter_t`, 
 enters a lobby, whichever API joined it: OnlineSubsystemSteam, SteamCorePRO, Advanced Steam Sessions or raw Steamworks.
 The most recently entered lobby is used.
 
+A lobby that was joined before the adapter started listening (for example in the main menu, before the plugin's
+subsystem existed) is found through the `GameSession` of the online subsystem. If the adapter still knows no lobby
+10 seconds into a networked match, it logs a warning: *in a networked match but no Steam lobby is known*. Without a
+lobby the players cannot find each other after the host is lost, so join the match through a Steam lobby session or
+call **Set Steam Lobby**.
+
 If players are in more than one lobby (a party lobby and a match lobby), call **Set Steam Lobby** with the match
 lobby's id on every machine. **Get Steam Lobby** returns the lobby in use.
 
@@ -66,6 +72,9 @@ the current host, and the host then points the lobby's session address (`P2PADDR
 itself. This takes a second or two after a migration. Only keys that already exist are changed, so lobbies created
 another way are left alone.
 
+This is **Manage Lobby Ownership** (on by default). Turn it off if your game uses the lobby owner for something of its
+own. Then players who join later do not find the new host through **Join Session**. Use **Find Host In Lobby** instead.
+
 So players coming back, or joining late, can use the usual **Find Sessions** and **Join Session** nodes.
 
 ## What the adapter does
@@ -74,7 +83,7 @@ So players coming back, or joining late, can use the usual **Find Sessions** and
 |---|---|
 | Is a player still in the session? | Lobby membership. |
 | Where is the host? | The host's own lobby member data: `hm_addr`, `hm_epoch`, `hm_players`. |
-| Is the host still running? | `hm_beat`, updated every 5 s while hosting. |
+| Is the host still running? | `hm_beat`, updated every **Heartbeat Interval** (5 s) while hosting. |
 | Is the successor still loading? | `hm_loading`, set while the successor loads the map. |
 | What is my address? | `steam.<my SteamID64>`. |
 
@@ -92,5 +101,5 @@ Players who are not connected yet (late joiners, returning players) can use **Jo
 ## Crash timing
 
 After a host crash, clients first try to rejoin it while Steam still lists it in the lobby. The migration starts when
-Steam removes the crashed host from the lobby, or when its `hm_beat` has not changed for 15 seconds, whichever comes
-first. A crash still takes longer than a graceful leave.
+Steam removes the crashed host from the lobby, or when its `hm_beat` has not changed for **Heartbeat Timeout**
+(15 s), whichever comes first. A crash still takes longer than a graceful leave.

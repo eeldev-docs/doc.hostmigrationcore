@@ -24,8 +24,8 @@ An adapter answers three questions:
 | `ClearHostReady()` | This machine stopped hosting. |
 | `PublishHostLoading(Epoch)` | This machine is loading the map as the successor for this epoch. |
 | `IsCandidateLoading(Candidate, Epoch)` | True if that candidate published it is loading. Clients then wait up to **Max Candidate Load Time**. |
-| `PublishHeartbeat(Beat)` | Called every 5 s while hosting. Write the number to the backend. |
-| `GetHeartbeat(PlayerId, OutBeat)` | Read the number that player wrote. Return false if there is none. A host whose beat has not changed for 15 s counts as gone. |
+| `PublishHeartbeat(Beat)` | Called every `HeartbeatInterval` (5 s) while hosting. Write the number to the backend. |
+| `GetHeartbeat(PlayerId, OutBeat)` | Read the number that player wrote. Return false if there is none. A host whose beat has not changed for `HeartbeatTimeout` (15 s) counts as gone. |
 | `GetAnnouncedHosts(OutHosts)` | Every announcement visible in the backend. Return false if there is no such channel. |
 | `FindAnnouncedHost(...)` | For players not connected yet. Default: highest epoch, then most players. Fills in the host's id, address and epoch. |
 | `CanSeeLobby()` | False when this machine cannot read the backend. Clients then connect to the candidate directly. Default: true. |

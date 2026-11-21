@@ -63,7 +63,7 @@ place, such as this machine's address, in a function of your own.
   and resolved.
 - **Plus presence:** a player whose connection drops while the host is still there rejoins the host instead of
   migrating.
-- **Plus heartbeat:** a host that crashed but is still listed is noticed after 15 s instead of when your backend
+- **Plus heartbeat:** a host that crashed but is still listed is noticed after **Heartbeat Timeout** (15 s) instead of when your backend
   drops it.
 - **Plus loading:** clients keep waiting for a successor that is still loading a large map.
 

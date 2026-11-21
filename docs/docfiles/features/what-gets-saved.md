@@ -18,6 +18,19 @@ title: What gets saved
 
 A placed actor that was destroyed before the migration stays destroyed on the new host.
 
+Each Host Migration Id must belong to one actor. If two actors carry the same id, the log warns *Host Migration Id ... is used by both ... and ...; only the last one is
+saved*.
+
+### Level streaming and World Partition
+
+Placed actors in streamed levels and World Partition cells are restored too:
+
+- **Levels the new host has not loaded yet:** the saved state of their placed actors (and which ones were destroyed)
+  is applied when the level is added. Until then the new host keeps that state in its own snapshots, so it survives
+  another migration.
+- **Levels that were unloaded on the old host** when the snapshot was taken have no saved state. Their placed actors
+  come back as they are placed in the level.
+
 ## Which data
 
 - **SaveGame variables.** Tick **SaveGame** on Blueprint variables (Advanced section), or use `UPROPERTY(SaveGame)` in

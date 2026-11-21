@@ -40,6 +40,8 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Is Migration Network Failure** (Failure Type) | True when a network failure starts or belongs to a migration. See [Session plugins](../features/session-plugins). |
 | **To Restored World Time** (Saved World Time) | New host: converts a world time saved on the old host to this world's clock. See [World time](../features/what-gets-saved#world-time). |
 | **Get Migrated World Time Offset** | New host: the difference between the old and the new world clock. |
+| **Get Last Failure Reason** | Why the last migration failed, as a short English text for logs. See [When a migration fails](../features/lost-connection#when-a-migration-fails). |
+| **Set Reconnect URL Options** (Options) | Client: URL options to send when reconnecting to a new host, e.g. `?Team=2`. Replaces **Reconnect URL Options** from the settings. See [Connecting to the new host](../features/lost-connection#connecting-to-the-new-host). |
 | **Move Party To Host** (Host Address) | Host: move every client to the host at this address, then follow them. Use it to bring your players into another match. A client that cannot connect ends up in Failed. The players stay in the old lobby: have them join the new host's lobby once they arrive, so migrations work there (see [EOS](../features/eos) and [Steam](../features/steam)). |
 
 ![Move Party To Host on the Host Migration subsystem, called only when Is Local Host is true](../../../static/img/blueprints/MovePartyToHost.png)
@@ -54,6 +56,7 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **On Host Connection Lost** (Reason) | Host: this machine seems to have lost its own connection. Steam or EOS reports it logged off, or at least two clients and all of them timed out within 5 seconds. The clients migrate without it; show a message or return to the menu. |
 | **On Snapshot Too Large** (Snapshot Bytes, Max Snapshot Bytes) | Host: a full snapshot went over **Max Snapshot Bytes** and is not sent. See [Snapshot traffic](../features/snapshot-traffic#size-limit). |
 | **On Removed By Host** (Reason) | Client: the host kicked this player. |
+| **On Migration Failed** (Reason) | A migration could not be completed. With **Travel On Failure** off, handle it here. See [When a migration fails](../features/lost-connection#when-a-migration-fails). |
 
 Bind them in your **GameInstance** (Event Init). A migration loads the map again, which destroys actors and widgets
 together with the events bound in them.

@@ -35,7 +35,7 @@ New to the plugin? Start with [Installing the plugin](docfiles/getting_started/i
 
 | Feature | Description |
 |---|---|
-| **[Host migration](docfiles/getting_started/how-it-works)** | Host crash or graceful leave, a successor takes over and restores the match. Chained migrations work. |
+| **[Host migration](docfiles/getting_started/quick-start)** | Host crash or graceful leave, a successor takes over and restores the match. Chained migrations work. |
 | **[What gets saved](docfiles/features/what-gets-saved)** | SaveGame variables on actors, components, PlayerStates, GameState and GameMode. References between actors survive. |
 | **[Delta snapshots](docfiles/features/snapshot-traffic)** | Only what changed is sent, verified by hash. About 10× less traffic than full snapshots. |
 | **[Players who come back](docfiles/features/players-coming-back)** | Players who leave or miss the migration get their state and pawn back when they rejoin. |
