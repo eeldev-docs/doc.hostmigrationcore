@@ -84,7 +84,10 @@ lost, every client walks the same list and picks the first player who is still t
 - **Stable order.** A candidate's ping only counts as changed when it moves by more than **Successor Score
   Hysteresis** (default 30 ms). Equal pings are ordered by net id. So small ping changes do not reorder or resend the
   list, and all clients agree on the order when the host is lost.
-- **Opt out:** **Set Local Player Can Host** (false) on a client keeps it out of the successor list.
+- **Opt out:** Call **Set Local Player Can Host** with `false` on the client to exclude it from the
+  successor list. Call it after the local PlayerController has a **Host Migration Client** component.
+  An earlier call has no effect and is not queued. The host applies the preference when it next builds
+  the successor list. Reapply the preference after reconnecting if it should persist.
 
 ## First announcement wins
 

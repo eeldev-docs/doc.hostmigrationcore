@@ -67,6 +67,18 @@ place, such as this machine's address, in a function of your own.
   drops it.
 - **Plus loading:** clients keep waiting for a successor that is still loading a large map.
 
+## LAN fallback settings
+
+The Null adapter defines these defaults. To customize them in Blueprint, open your **Host Migration
+Adapter (Blueprint)** subclass, edit **Class Defaults > Host Migration**, then select that class in
+**Project Settings > Plugins > Host Migration > Adapter Class**.
+
+| Setting | Default | When it applies |
+|---|---|---|
+| **Listen Port** (`ListenPort`) | 7777 | The default **Get Connect Address** appends this port to the candidate IP. Match it to the port the successor actually listens on when using direct IP connections. |
+| **Assumed Host Delay** (`AssumedHostDelay`) | 4 s | How long the Null adapter waits before trying the candidate's address. The Blueprint adapter uses this fallback when **Get Announced Hosts** returns false. Return true with an empty list when the announcement channel is available but no host has announced. |
+| **Take Over Session** (`bTakeOverSession`) | on | Lets the native Null adapter recreate the LAN `GameSession` on the successor with OnlineSubsystem Null. The Blueprint adapter inherits this behavior through the default **Publish Host Ready** implementation. If you override that event, call its parent to keep the LAN takeover. |
+
 ## Calls
 
 | Node | What it does |

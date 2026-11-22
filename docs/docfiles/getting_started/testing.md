@@ -20,16 +20,18 @@ UnrealEditor.exe "C:/Path/YourGame.uproject" /Game/Maps/YourMap?listen -game -lo
 UnrealEditor.exe "C:/Path/YourGame.uproject" 127.0.0.1 -game -log -windowed -ResX=960 -ResY=540
 ```
 
-Start the host first, then two or more clients. Wait a few seconds (one snapshot interval), then close the host
-window. Watch the clients' logs for `LogHostMigration`:
+Start the host first, then two or more clients. Change a recognizable value such as a score or an actor's
+position. Use the [debug overlay](#debug-overlay) to confirm each client has received a recent snapshot before
+testing either path.
 
-```text
-LogHostMigration: Host lost (ConnectionLost: ...); starting migration
-LogHostMigration: State Running -> Electing
-...
-LogHostMigration: Restored player ... (with pawn)
-```
+| Test | Action | Expected result |
+|---|---|---|
+| Graceful handover | Use the subsystem's **Quit Game** node on the host. You can also close the host window with **Hand Over On Window Close** enabled. | The host starts the handover and attempts to send a final snapshot before exiting. |
+| Host crash | Start a fresh match, confirm snapshot delivery, then end the host process directly instead of closing its window. | Clients detect the lost connection and migrate using their last usable snapshot. Changes made after that snapshot may be lost. |
 
+For each test, check that one client becomes host, the others reconnect, and the saved score or actor state
+is restored. During a crash test, look for `LogHostMigration` messages such as `Host lost`,
+`Becoming host` and `Restored player`.
 :::note
 The Null adapter has no presence and no announcements: clients assume the successor is up after a short delay, and
 lost-connection handling (rejoin, split brain) does not apply. Use Steam or EOS to test those.
@@ -40,7 +42,7 @@ lost-connection handling (rejoin, split brain) does not apply. Use Steam or EOS 
 With OnlineSubsystem Null, a player who joined a LAN session does not advertise it. When that player becomes the host,
 the Null adapter takes over the `GameSession`: it recreates it with this machine as owner, without firing the
 create, start or destroy session events, and registers the players again. **Find Sessions** on LAN then finds the new
-host. Turn this off with **Take Over Session** on the Null adapter.
+host. See [LAN fallback settings](../blueprint/blueprint-adapter#lan-fallback-settings) for **Take Over Session** and the other Null adapter defaults.
 
 :::note Lyra
 Lyra's CommonSessionSubsystem joins through a reservation beacon on the host, which the new host does not have. Set

@@ -39,6 +39,9 @@ An adapter answers three questions:
 If your backend pushes events, call `UHostMigrationSubsystem::HandleHostAnnounced` when an announcement arrives. When
 your backend becomes usable after hosting started, call `RefreshHostAnnouncement`.
 
+The Null adapter exposes **Listen Port**, **Assumed Host Delay**, and **Take Over Session** as class defaults.
+See [LAN fallback settings](../blueprint/blueprint-adapter#lan-fallback-settings) for defaults and when each applies.
+
 ## Why not one adapter on top of the Online Subsystem?
 
 Host migration needs per-member data that every member can write.

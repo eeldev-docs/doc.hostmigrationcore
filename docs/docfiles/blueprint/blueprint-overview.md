@@ -24,13 +24,14 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 | **Quit Game** | Quit the game. On the host, hands it over first. Use instead of the engine's Quit Game. |
 | **Begin Graceful Migration** | Host: send a final snapshot and tell everyone to migrate now. |
 | **Get State** | Current [state](#states). |
-| **Is Migrating** | True during a migration (not Running, not Failed). |
+| **Is Migrating** | True during an active migration or while a graceful handover is pending. In the latter case, **Get State** can still return `Running`. |
 | **Is Local Host** | True on the machine that hosts. |
 | **Get Epoch** | Increases with each migration. |
 | **Get Status Text** | Localized status line for UI. |
 | **Get Num Players Awaited** | Players the new host is still waiting for. |
 | **Get Host Address** | Address of the current host. |
-| **Find Host In Lobby** (out Host Address, Epoch) | For players not connected yet: where the current host is. Pure node, returns false if no host has announced itself. |
+| **Find Host In Lobby** (out Host Address, Epoch) | For players not connected yet: where the current host is. Call this node on the execution path and branch on its return value before using the outputs. |
+| **Set Local Player Can Host** | Client: set whether this player is eligible to become the next host. Call after the local PlayerController receives the migration client component. See [Choosing the successor](../features/lost-connection#choosing-the-successor). |
 | **Get Num Inactive Players** | Host: players whose state is kept for a rejoin. |
 | **Get Snapshot Stats** | Host: snapshot sizes and traffic. |
 | **Notify Game Ready** | With **Wait For Game Ready**: the game has set up the match, the new host can restore. See [Games that set up the match later](../features/game-ready). |

@@ -67,6 +67,18 @@ The new host's world clock starts from zero, so a **Get Game Time in Seconds** v
 nothing on the new one. Convert it with **To Restored World Time** on the subsystem. **Get Migrated World Time
 Offset** returns the difference. Both are set before **On Host Migration Restored** runs.
 
+## Movement and physics
+
+**Save Motion** on the **Host Migration Id** component is enabled by default.
+
+| Actor | Motion carried over |
+|---|---|
+| `ACharacter` with a Character Movement component | Velocity, movement mode, and custom movement mode. |
+| Other actors with a physics-simulating primitive root component | Linear and angular velocity. The root must also be simulating physics when the velocity is restored. |
+
+For a custom movement component or a separate physics body, capture the state you need in
+**On Host Migration Save** and apply it in **On Host Migration Restored**.
+
 ## Components
 
 Every component with SaveGame variables (or `IHostMigratable`) is saved with its owner: default components,
@@ -143,7 +155,7 @@ Raw pointers, `TObjectPtr`, `TWeakObjectPtr` and references written through `IHo
 - Owners that are neither migrated actors nor a player's PlayerController (for example a PlayerState), and owners
   whose player does not return during the grace period.
 - The state of AI controllers without a Host Migration Id.
-- Timers, animation state, physics velocity, in-flight RPCs. Save what you need in
+- Timers, animation state, and in-flight RPCs. See [Movement and physics](#movement-and-physics) for the supported velocity data. Save what you need in
   [On Host Migration Save](../blueprint/events) and restart it in **On Host Migration Restored**.
 - Progress made after the last snapshot (at most one Snapshot Interval). A graceful leave sends a final snapshot.
 
