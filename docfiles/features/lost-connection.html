@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.10.2">
 <title data-rh="true">Lost connection | HostMigrationCore Documentation</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://hostmigrationcore.eeldev.com/docfiles/features/lost-connection"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Lost connection | HostMigrationCore Documentation"><meta data-rh="true" name="description" content="A dropped connection does not always mean the host is gone. These rules keep one player&#x27;s network trouble from"><meta data-rh="true" property="og:description" content="A dropped connection does not always mean the host is gone. These rules keep one player&#x27;s network trouble from"><link data-rh="true" rel="icon" href="/img/eeldev_icon.png"><link data-rh="true" rel="canonical" href="https://hostmigrationcore.eeldev.com/docfiles/features/lost-connection"><link data-rh="true" rel="alternate" href="https://hostmigrationcore.eeldev.com/docfiles/features/lost-connection" hreflang="en"><link data-rh="true" rel="alternate" href="https://hostmigrationcore.eeldev.com/docfiles/features/lost-connection" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Lost connection","item":"https://hostmigrationcore.eeldev.com/docfiles/features/lost-connection"}]}</script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"><link rel="stylesheet" href="/assets/css/styles.454b5c30.css">
-<script src="/assets/js/runtime~main.7b79c585.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.5f915d98.js" defer="defer"></script>
 <script src="/assets/js/main.86b2456d.js" defer="defer"></script>
 </head>
 <body>
@@ -89,7 +89,10 @@ Within each group, the lower ping comes first. A client without a snapshot can s
 <li class=""><strong>Stable order.</strong> A candidate&#x27;s ping only counts as changed when it moves by more than <strong>Successor Score
 Hysteresis</strong> (default 30 ms). Equal pings are ordered by net id. So small ping changes do not reorder or resend the
 list, and all clients agree on the order when the host is lost.</li>
-<li class=""><strong>Opt out:</strong> <strong>Set Local Player Can Host</strong> (false) on a client keeps it out of the successor list.</li>
+<li class=""><strong>Opt out:</strong> Call <strong>Set Local Player Can Host</strong> with <code>false</code> on the client to exclude it from the
+successor list. Call it after the local PlayerController has a <strong>Host Migration Client</strong> component.
+An earlier call has no effect and is not queued. The host applies the preference when it next builds
+the successor list. Reapply the preference after reconnecting if it should persist.</li>
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="first-announcement-wins">First announcement wins<a href="#first-announcement-wins" class="hash-link" aria-label="Direct link to First announcement wins" title="Direct link to First announcement wins" translate="no">​</a></h2>
 <p>Waiting clients join any host that announces the new epoch, not only the candidate they were waiting for. A candidate
