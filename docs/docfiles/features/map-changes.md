@@ -86,6 +86,14 @@ Use the subsystem's **Quit Game** for your quit button. Window-close handling wo
 games, not in PIE. If your game already handles the window close (e.g. an "are you sure?" prompt bound to
 `OnWindowCloseRequested`), it is asked first.
 
+### Graceful handover timing
+
+The subsystem's **Leave Session** and **Quit Game** nodes wait up to 10 seconds for queued snapshot chunks
+to be sent. If the queue drains, they wait up to about 5 more seconds for clients to acknowledge the snapshot.
+They proceed sooner if all remote players have left. A slow connection, a low
+[snapshot traffic cap](snapshot-traffic#tuning), or an oversized full snapshot can leave a client with an
+older snapshot when the host exits.
+
 **Begin Graceful Migration** is the lower-level version for the host: it sends a final snapshot and tells everyone to
 migrate. Leave about a second later, so the messages get out.
 

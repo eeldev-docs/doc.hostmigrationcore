@@ -46,6 +46,10 @@ Get it with **Get HostMigrationSubsystem** (it's a GameInstance subsystem).
 
 ![Move Party To Host on the Host Migration subsystem, called only when Is Local Host is true](../../../static/img/blueprints/MovePartyToHost.png)
 
+The subsystem also exposes **Save Snapshot To Slot**, **Does Saved Snapshot Exist**, **Host From Saved Snapshot**,
+and **Delete Saved Snapshot**. See [Saved snapshots](../features/saved-snapshots) for return values and an example
+menu flow.
+
 ## Subsystem events
 
 | Event | When |
@@ -74,6 +78,11 @@ together with the events bound in them.
 | **Is Host Migration Network Failure** (Failure Type) | Same as Is Migration Network Failure, from any world context. |
 | **Unique Net Id To String** | The string form used for player ids. |
 | **Set Debug Overlay Visible** | Shows or hides the [debug overlay](../getting_started/testing#debug-overlay). |
+| **Save Timer** | Capture the active state, remaining time and rate of a timer. Supply whether it loops. |
+| **Get Saved Timer Remaining** | Get the captured remaining time in seconds. |
+| **Is Saved Timer Active** | Check whether the timer was active when captured. |
+
+See [Restoring timers](../features/what-gets-saved#restoring-timers) for a Blueprint example.
 
 ## Steam
 

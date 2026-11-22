@@ -21,6 +21,11 @@ Or in `Config/DefaultGame.ini`:
 AdapterClass=/Script/HostMigrationCoreSteam.HostMigrationAdapter_Steam
 ```
 
+If `DefaultPlatformService=Crossplay` and **Adapter Class** is empty, the plugin tries to load the
+**Crossplay Lobby** adapter from the `CrossplayHostMigration` module. If the class cannot be loaded,
+the plugin falls back to **Null** and logs a warning. Check the `LogHostMigration` startup line
+`Host migration enabled, adapter ...` to confirm the active adapter before testing late joins.
+
 ## 2. Optional: set a wait map
 
 Clients wait while the new host starts up. By default they stay in the match world, with the connection closed. The

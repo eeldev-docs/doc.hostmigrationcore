@@ -33,8 +33,8 @@ Measured with 4 players, 300 static props and gameplay going on:
 - **Use Delta Snapshots:** turn off to always send full snapshots.
 - **Chunk Size:** compressed bytes per RPC.
 - **Max Snapshot Bytes Per Second Per Client:** caps the snapshot traffic to each client. 0 (the default) means no
-  limit, with one chunk per frame. A graceful handover waits until the queued data has been sent, so a low cap makes
-  leaving slower.
+  limit, with one chunk per frame. A low cap can delay a graceful handover or leave clients with an older
+  snapshot. See [Graceful handover timing](map-changes#graceful-handover-timing).
 - **Get Snapshot Stats** (host) returns the size of the last full snapshot, last delta size, changed records, bytes per second and counts of
   fulls, deltas and resyncs. A summary is logged every 30 s.
 - Only mark what must survive as SaveGame. Large records that change often (big inventories) are resent whole every
@@ -46,10 +46,13 @@ Measured with 4 players, 300 static props and gameplay going on:
 
 A full snapshot larger than **Max Snapshot Bytes** (compressed, default 512 KB) is not sent.
 
-- Clients that already have a snapshot keep getting deltas.
-- New clients get nothing, so they cannot take part in a migration.
-- The host logs an error once and fires **On Snapshot Too Large** (Snapshot Bytes, Max Snapshot Bytes) when the size
-  crosses the limit. **Get Snapshot Stats** reports it as **Over Size Limit**, and the
+- An existing client can still get a delta when deltas are enabled, the client's baseline is in the host's
+  history, and the delta fits within the transfer limits.
+- New clients and clients that need a full resync cannot get a current snapshot while the full snapshot is
+  over the limit. A new client without any snapshot cannot take part in a migration.
+- The host checks this limit when it builds a full payload. On the first over-limit result it logs an error
+  and fires **On Snapshot Too Large** (Snapshot Bytes, Max Snapshot Bytes). A later full payload under the
+  limit clears the flag. **Get Snapshot Stats** reports it as **Over Size Limit**, and the
   [debug overlay](../getting_started/testing#debug-overlay) shows it in red.
 
 Clients ignore anything above twice **Max Snapshot Bytes** compressed (or 32 times that uncompressed), and the host

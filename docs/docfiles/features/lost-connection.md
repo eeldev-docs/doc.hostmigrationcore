@@ -68,6 +68,12 @@ bTravelOnFailure=true
 FailureTravelURL=/Game/Maps/MainMenu
 ```
 
+### Resume from a saved snapshot
+
+Enable **Save Snapshot On Failure** to save the last valid snapshot locally when migration fails. The
+default slot is **HostMigrationFailure**. See [Saved snapshots](saved-snapshots) for a menu flow that
+resumes the match from that slot.
+
 ## Choosing the successor
 
 Each snapshot contains an ordered **successor list**: the players who may take over, best first. When the host is

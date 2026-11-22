@@ -146,3 +146,48 @@ Raw pointers, `TObjectPtr`, `TWeakObjectPtr` and references written through `IHo
 - Timers, animation state, physics velocity, in-flight RPCs. Save what you need in
   [On Host Migration Save](../blueprint/events) and restart it in **On Host Migration Restored**.
 - Progress made after the last snapshot (at most one Snapshot Interval). A graceful leave sends a final snapshot.
+
+## Restoring timers
+
+In the HostMigrationTest project, open **HostMigrationDocs → BP_RoundTimerMigrationExample** in the
+Content Browser. In **Event Graph**, the custom event **BeginRoundCountdown** clears the previous timer and starts a
+new 60-second countdown. **Set Timer by Function Name** uses **OnRoundTimerElapsed** as the callback,
+and its return value is stored in **Round Timer Handle**.
+
+![BeginRoundCountdown clears the old timer, starts a one-shot 60-second timer, and stores the new handle](../../../static/img/blueprints/BP_RoundTimerMigrationExample_BeginRoundCountdown.png)
+
+When the countdown ends, the **OnRoundTimerElapsed** custom event prints a message. Replace this
+debug output with your round-end logic.
+
+![OnRoundTimerElapsed custom event prints Round timer elapsed](../../../static/img/blueprints/BP_RoundTimerMigrationExample_OnRoundTimerElapsed.png)
+
+The **SaveRoundTimer** custom event captures the one-shot timer and stores the result in
+**Saved Round Timer**.
+
+![SaveRoundTimer passes Round Timer Handle to Save Timer and stores the result in Saved Round Timer](../../../static/img/blueprints/BP_RoundTimerMigrationExample_SaveRoundTimer.png)
+
+The **RestoreRoundTimer** custom event clears the existing timer and starts it again if the saved
+remaining time is positive.
+
+![RestoreRoundTimer reads the saved time, checks that it is positive, and starts a new timer with that duration](../../../static/img/blueprints/BP_RoundTimerMigrationExample_RestoreRoundTimer.png)
+
+To wire these custom events into migration, add **Host Migration Id** and implement **Host Migration
+Events** on the actor. Mark **Saved Round Timer** as **SaveGame**, call **SaveRoundTimer** from
+**On Host Migration Save**, and call **RestoreRoundTimer** from **On Host Migration Restored**.
+
+To resume a one-shot round timer in Blueprint, keep its timer handle when you start it. Add a variable
+of type **Host Migration Saved Timer** to the migrated actor or component and mark it **SaveGame**.
+
+1. In **On Host Migration Save**, call **Save Timer** with the handle and **Looping** off. Assign the
+   result to the SaveGame variable.
+2. In **On Host Migration Restored**, clear any timer that match initialization started for the same
+   event. If **Is Saved Timer Active** is true and **Get Saved Timer Remaining** is positive, call
+   **Set Timer by Event** with the saved remaining time and **Looping** off. Bind the original round
+   timer event and store the new timer handle.
+3. For a repeating timer, use the saved remaining time for the first firing and the saved **Rate**
+   for subsequent firings. In Blueprint, a one-shot timer can run the first firing and start the
+   repeating timer at that point.
+
+In C++, call `UHostMigrationBlueprintLibrary::RestoreTimer` with the saved struct and a delegate bound
+to the restored object. It returns a new `FTimerHandle`. Elapsed time while the match is migrating is
+excluded from the saved countdown.
