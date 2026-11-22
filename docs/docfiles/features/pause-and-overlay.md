@@ -34,3 +34,30 @@ The widget is created again after every map load during a migration. Read the su
 keep your own state in the widget.
 
 To handle everything yourself, turn **Show Migration Overlay** off and bind **On State Changed**.
+
+## Blueprint example in HostMigrationTest
+
+Open **HostMigrationDocs** in the Content Browser for two Event Graph examples:
+
+- **BP_MigrationStatusGameInstance** assigns **On State Changed** in **Event Init**. The resulting custom
+  event logs **Get Status Text** on each transition. The binding lives in the GameInstance across map changes.
+
+  ![Event Init binds On State Changed, and the custom event prints Get Status Text on every transition](../../../static/img/blueprints/BP_MigrationStatusGameInstance_EventGraph.png)
+
+- **WBP_MigrationStatusExample** sets its status label from **Get Status Text** in **Event Construct** and
+  refreshes it in **Event Tick** while on screen. This keeps the text current when the number of players
+  awaited changes within the same migration state. The widget passes mouse input through.
+
+![Event Construct makes the widget hit-test invisible and sets Status Label. Event Tick refreshes it with Get Status Text](../../../static/img/blueprints/WBP_MigrationStatusExample_EventGraph.png)
+
+To use the widget, leave **Show Migration Overlay** enabled and set **Overlay Widget Class** to
+**WBP_MigrationStatusExample**. The plugin adds the widget to the viewport and shows it again after map
+travel when a migration is still in progress. The status always comes from the subsystem.
+
+For the logging example in a test project, select **BP_MigrationStatusGameInstance** as the **Game Instance
+Class** under **Project Settings > Maps & Modes**. If your game already has a custom GameInstance, copy the
+event binding into its existing **Event Init** graph. The widget can be used on its own.
+
+Test with [separate game processes](../getting_started/testing#local-null-adapter). During a host handover,
+look for state messages and confirm the overlay appears again after travel while reconnecting and disappears
+when play resumes.
