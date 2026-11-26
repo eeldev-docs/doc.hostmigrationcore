@@ -37,7 +37,20 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
         },
-        blog: false,
+        blog: {
+          path: 'changelog',
+          routeBasePath: 'changelog',
+          blogTitle: 'HostMigrationCore Changelog',
+          blogDescription: 'Release notes for HostMigrationCore',
+          blogSidebarTitle: 'Recent releases',
+          showReadingTime: false,
+          onUntruncatedBlogPosts: 'ignore',
+          feedOptions: {
+            type: 'rss',
+            title: 'HostMigrationCore Changelog',
+            description: 'Release notes for HostMigrationCore',
+          },
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
