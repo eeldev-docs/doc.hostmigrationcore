@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdoc_hostmigrationcore=self.webpackChunkdoc_hostmigrationcore||[]).push([[5832],{9990:o=>{o.exports=JSON.parse('{"metadata":{"permalink":"/changelog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":5,"blogDescription":"Release notes for HostMigrationCore","blogTitle":"HostMigrationCore Changelog"}}')}}]);
