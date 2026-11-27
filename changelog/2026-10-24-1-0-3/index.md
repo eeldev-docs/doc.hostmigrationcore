@@ -13,5 +13,3 @@ slug: 1-0-3
 - Fixed clients disconnecting a few seconds after they reached the new host.
 - Restored the previous host's state and pawn on reconnection during the grace period.
 - Corrected rejoin handling for host addresses that contain a colon.
-
-[Original release notes](https://eeldev.com/index.php/host-migration-1-0-3/)

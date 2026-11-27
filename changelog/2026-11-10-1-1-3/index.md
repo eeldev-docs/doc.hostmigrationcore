@@ -18,5 +18,3 @@ slug: 1-1-3
 - When the plugin finds multiple hosts, it prefers the one with the newest epoch and uses player count as a tiebreaker.
 - Switching lobbies mid-match is treated as leaving the match.
 - Steam and EOS automatically rejoin the match lobby if a player loses membership during play.
-
-[Original release notes](https://eeldev.com/index.php/host-migration-1-1-3/)

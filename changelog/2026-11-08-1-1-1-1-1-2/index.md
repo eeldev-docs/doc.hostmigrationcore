@@ -14,5 +14,3 @@ slug: 1-1-1-1-1-2
 
 - The successor carries over the previous host's map URL options, including game mode parameters such as `?Experience=X?NumBots=0`.
 - Clients that lose lobby membership during migration no longer start a second host. Steam and EOS clients try to rejoin the lobby, then fall back to connecting directly to the successor's platform address.
-
-[Original release notes](https://eeldev.com/index.php/host-migration-1-1-1/)

@@ -17,5 +17,3 @@ slug: 1-1-0
 - During non-seamless `ServerTravel`, clients that miss the map change can reconnect if the host remains in the session. This handles cases such as EOS closing the host's P2P socket while the map loads.
 - The warning about using the Null adapter with a Steam or EOS net driver now identifies the corresponding adapter.
 - Get Steam Lobby and Get EOS Lobby are now callable in Blueprint. Their C++ versions are static and take a world context, like the corresponding setters.
-
-[Original release notes](https://eeldev.com/index.php/host-migration-1-1-0/)
